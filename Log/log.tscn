@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://byy4rowhpjrdf"]
+
+[ext_resource type="Texture2D" uid="uid://ckqr0sxc6lsv4" path="res://Log/log.png" id="1_1hqg2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tni6k"]
+size = Vector2(58, 19)
+
+[node name="Log" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_1hqg2")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_tni6k")

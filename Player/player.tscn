@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=3 uid="uid://bhl8fy0l6levh"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_g3ng8"]
+[ext_resource type="Texture2D" uid="uid://bq02nrer4ljja" path="res://Player/player.png" id="1_gejye"]
+[ext_resource type="Script" path="res://Player/state_machine.gd" id="3_3udcm"]
+[ext_resource type="Script" path="res://Player/idle.gd" id="4_rrs2i"]
+[ext_resource type="Script" path="res://Player/waiting.gd" id="5_s8tw2"]
+[ext_resource type="Script" path="res://Player/reeling.gd" id="6_q6q68"]
+[ext_resource type="Texture2D" uid="uid://ct67mqvw8ciq7" path="res://Hook/hook.png" id="7_mwuoa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jbqkx"]
+size = Vector2(34, 107)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_g3ng8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-14, -12.3842)
+scale = Vector2(0.35468, 0.35468)
+texture = ExtResource("1_gejye")
+
+[node name="HookSprite" type="Sprite2D" parent="."]
+position = Vector2(-7.62939e-06, 0)
+scale = Vector2(0.0515021, 0.0515021)
+texture = ExtResource("7_mwuoa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.115768)
+shape = SubResource("RectangleShape2D_jbqkx")
+
+[node name="ThrowChargeTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("CURRENT_STATE")]
+script = ExtResource("3_3udcm")
+CURRENT_STATE = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("4_rrs2i")
+
+[node name="Waiting" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("5_s8tw2")
+
+[node name="Reeling" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("6_q6q68")
+
+[connection signal="charge_hook" from="PlayerStateMachine/Idle" to="." method="_on_idle_charge_hook"]
+[connection signal="throw_hook" from="PlayerStateMachine/Idle" to="." method="_on_idle_throw_hook"]

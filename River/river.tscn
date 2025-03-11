@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvkv21wkwo18p"]
+
+[ext_resource type="PackedScene" uid="uid://bhl8fy0l6levh" path="res://Player/player.tscn" id="1_jc3st"]
+
+[node name="River" type="Node2D"]
+
+[node name="Water" type="ColorRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 486.0
+color = Color(0.176471, 0.607843, 0.941176, 1)
+
+[node name="Grass" type="ColorRect" parent="."]
+offset_top = 486.0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.560784, 0.819608, 0.309804, 1)
+
+[node name="Player" parent="." instance=ExtResource("1_jc3st")]
+position = Vector2(532, 472)

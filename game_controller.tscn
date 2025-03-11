@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6y6igu11f5wy"]
+
+[ext_resource type="PackedScene" uid="uid://dvkv21wkwo18p" path="res://River/river.tscn" id="1_it37d"]
+
+[node name="GameController" type="Node2D"]
+
+[node name="River" parent="." instance=ExtResource("1_it37d")]

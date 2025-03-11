@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4mr8y2p40pjp"]
+
+[ext_resource type="Texture2D" uid="uid://chyyic1dp6ctq" path="res://Fish/fish.png" id="1_yychq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2bvhk"]
+radius = 54.037
+
+[node name="Fish" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.109375, 0.109375)
+texture = ExtResource("1_yychq")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2bvhk")

@@ -1,8 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://dvkv21wkwo18p"]
+[gd_scene load_steps=8 format=3 uid="uid://dvkv21wkwo18p"]
 
+[ext_resource type="Script" path="res://River/river.gd" id="1_f45dc"]
 [ext_resource type="PackedScene" uid="uid://bhl8fy0l6levh" path="res://Player/player.tscn" id="1_jc3st"]
+[ext_resource type="Script" path="res://River/fish_spawn_zone.gd" id="2_wj8au"]
+[ext_resource type="PackedScene" uid="uid://c1mbiqknreisl" path="res://Hook/hook.tscn" id="4_a60od"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j3qnw"]
+size = Vector2(1152, 282)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_385mj"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_2ullu"]
+normal = Vector2(-1, 0)
 
 [node name="River" type="Node2D"]
+script = ExtResource("1_f45dc")
 
 [node name="Water" type="ColorRect" parent="."]
 offset_right = 1152.0
@@ -17,3 +30,46 @@ color = Color(0.560784, 0.819608, 0.309804, 1)
 
 [node name="Player" parent="." instance=ExtResource("1_jc3st")]
 position = Vector2(532, 472)
+
+[node name="Hook" parent="." instance=ExtResource("4_a60od")]
+
+[node name="FishSpawnZone" type="Area2D" parent="."]
+position = Vector2(0, 50)
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("2_wj8au")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FishSpawnZone"]
+position = Vector2(576, 141)
+shape = SubResource("RectangleShape2D_j3qnw")
+
+[node name="FishSpawnTimer" type="Timer" parent="FishSpawnZone"]
+wait_time = 3.0
+one_shot = true
+
+[node name="WorldBoundaries" type="Node" parent="."]
+
+[node name="WorldBoundaryLeft" type="StaticBody2D" parent="WorldBoundaries"]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundaries/WorldBoundaryLeft"]
+position = Vector2(0, 487)
+shape = SubResource("WorldBoundaryShape2D_385mj")
+
+[node name="WorldBoundaryRight" type="StaticBody2D" parent="WorldBoundaries"]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundaries/WorldBoundaryRight"]
+position = Vector2(1152, 486)
+shape = SubResource("WorldBoundaryShape2D_2ullu")
+
+[connection signal="max_tension" from="Player" to="." method="_on_player_max_tension"]
+[connection signal="reeling" from="Player" to="." method="_on_player_reeling"]
+[connection signal="relaxing" from="Player" to="." method="_on_player_relaxing"]
+[connection signal="retract_hook" from="Player" to="." method="_on_player_retract_hook"]
+[connection signal="throw_hook" from="Player" to="." method="_on_player_throw_hook"]
+[connection signal="fish_caught" from="FishSpawnZone" to="." method="_on_fish_spawn_zone_fish_caught"]
+[connection signal="fish_hooked" from="FishSpawnZone" to="." method="_on_fish_spawn_zone_fish_hooked"]
+[connection signal="timeout" from="FishSpawnZone/FishSpawnTimer" to="FishSpawnZone" method="_on_fish_spawn_timer_timeout"]

@@ -44,6 +44,15 @@ player_move_right={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Hook"
+2d_physics/layer_3="Obstacles"
+2d_physics/layer_4="WorldBoundaries"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+textures/stretch/mode="canvas_items"
+textures/stretch/scale=1.0

@@ -3,6 +3,7 @@ class_name Idle extends State
 
 signal charge_hook
 signal throw_hook
+var charging = true
 
 func enter() -> void:
 	pass
@@ -19,7 +20,9 @@ func physics_update(delta: float) -> void:
 	if Input.is_action_just_pressed("player_primary_action"):
 		print("Charging hook")
 		charge_hook.emit()
-	if Input.is_action_just_released("player_primary_action"):
+		charging = true
+	if Input.is_action_just_released("player_primary_action") && charging:
 		print("Throw hook")
 		throw_hook.emit()
 		transition.emit("Waiting")
+		charging = false

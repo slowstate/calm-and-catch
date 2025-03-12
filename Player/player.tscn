@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bhl8fy0l6levh"]
+[gd_scene load_steps=8 format=3 uid="uid://bhl8fy0l6levh"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_g3ng8"]
 [ext_resource type="Texture2D" uid="uid://bq02nrer4ljja" path="res://Player/player.png" id="1_gejye"]
@@ -6,23 +6,18 @@
 [ext_resource type="Script" path="res://Player/idle.gd" id="4_rrs2i"]
 [ext_resource type="Script" path="res://Player/waiting.gd" id="5_s8tw2"]
 [ext_resource type="Script" path="res://Player/reeling.gd" id="6_q6q68"]
-[ext_resource type="Texture2D" uid="uid://ct67mqvw8ciq7" path="res://Hook/hook.png" id="7_mwuoa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jbqkx"]
 size = Vector2(34, 107)
 
 [node name="Player" type="CharacterBody2D"]
+collision_mask = 8
 script = ExtResource("1_g3ng8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-14, -12.3842)
 scale = Vector2(0.35468, 0.35468)
 texture = ExtResource("1_gejye")
-
-[node name="HookSprite" type="Sprite2D" parent="."]
-position = Vector2(-7.62939e-06, 0)
-scale = Vector2(0.0515021, 0.0515021)
-texture = ExtResource("7_mwuoa")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.115768)
@@ -47,3 +42,6 @@ script = ExtResource("6_q6q68")
 
 [connection signal="charge_hook" from="PlayerStateMachine/Idle" to="." method="_on_idle_charge_hook"]
 [connection signal="throw_hook" from="PlayerStateMachine/Idle" to="." method="_on_idle_throw_hook"]
+[connection signal="retract_hook" from="PlayerStateMachine/Waiting" to="." method="_on_waiting_retract_hook"]
+[connection signal="reeling" from="PlayerStateMachine/Reeling" to="." method="_on_reeling_reeling"]
+[connection signal="relaxing" from="PlayerStateMachine/Reeling" to="." method="_on_reeling_relaxing"]

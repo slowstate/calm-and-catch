@@ -1,5 +1,19 @@
-[gd_scene format=3 uid="uid://c1mbiqknreisl"]
+[gd_scene load_steps=3 format=3 uid="uid://c1mbiqknreisl"]
+
+[ext_resource type="Texture2D" uid="uid://ct67mqvw8ciq7" path="res://Hook/hook.png" id="1_kfkll"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_47ev4"]
+radius = 15.0
 
 [node name="Hook" type="Area2D"]
+visible = false
+collision_layer = 2
+collision_mask = 0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="HookSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -9)
+scale = Vector2(0.0515021, 0.0515021)
+texture = ExtResource("1_kfkll")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_47ev4")

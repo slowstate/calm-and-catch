@@ -5,6 +5,7 @@ extends Area2D
 
 signal caught(fish)
 signal hooked(fish)
+signal obstacle_hit(fish)
 
 var shake = 1
 
@@ -22,12 +23,12 @@ func _on_area_entered(area: Area2D) -> void:
 	if area.collision_layer == 2:
 		hooked_timer.wait_time = randi_range(2, 4)
 		hooked_timer.start()
-	elif area.collision_layer == 3:
-		# Add interaction with obstacles
-		print("collision layer 3: obstacle")
+	elif area.collision_layer == 4:
+		obstacle_hit.emit(self)
 
 func _on_hooked_timer_timeout() -> void:
 	if has_overlapping_areas():
+		set_collision_mask_value(3, true)
 		hooked.emit(self)
 
 func _on_body_entered(body: Node2D) -> void:

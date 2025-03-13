@@ -1,12 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://dvkv21wkwo18p"]
+[gd_scene load_steps=10 format=3 uid="uid://dvkv21wkwo18p"]
 
 [ext_resource type="Script" path="res://River/river.gd" id="1_f45dc"]
 [ext_resource type="PackedScene" uid="uid://bhl8fy0l6levh" path="res://Player/player.tscn" id="1_jc3st"]
 [ext_resource type="Script" path="res://River/fish_spawn_zone.gd" id="2_wj8au"]
 [ext_resource type="PackedScene" uid="uid://c1mbiqknreisl" path="res://Hook/hook.tscn" id="4_a60od"]
+[ext_resource type="Script" path="res://River/obstacle_spawn_zone.gd" id="5_efqls"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j3qnw"]
-size = Vector2(1152, 282)
+size = Vector2(1152, 300)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d3h43"]
+size = Vector2(1, 350)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_385mj"]
 normal = Vector2(1, 0)
@@ -29,21 +33,32 @@ offset_bottom = 648.0
 color = Color(0.560784, 0.819608, 0.309804, 1)
 
 [node name="Player" parent="." instance=ExtResource("1_jc3st")]
+z_index = 1
 position = Vector2(532, 472)
 
 [node name="Hook" parent="." instance=ExtResource("4_a60od")]
 
 [node name="FishSpawnZone" type="Area2D" parent="."]
-position = Vector2(0, 50)
+position = Vector2(580, 200)
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("2_wj8au")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FishSpawnZone"]
-position = Vector2(576, 141)
 shape = SubResource("RectangleShape2D_j3qnw")
 
 [node name="FishSpawnTimer" type="Timer" parent="FishSpawnZone"]
+wait_time = 3.0
+one_shot = true
+
+[node name="ObstacleSpawnZone" type="Area2D" parent="."]
+position = Vector2(-60, 200)
+script = ExtResource("5_efqls")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ObstacleSpawnZone"]
+shape = SubResource("RectangleShape2D_d3h43")
+
+[node name="ObstacleSpawnTimer" type="Timer" parent="ObstacleSpawnZone"]
 wait_time = 3.0
 one_shot = true
 
@@ -72,4 +87,6 @@ shape = SubResource("WorldBoundaryShape2D_2ullu")
 [connection signal="throw_hook" from="Player" to="." method="_on_player_throw_hook"]
 [connection signal="fish_caught" from="FishSpawnZone" to="." method="_on_fish_spawn_zone_fish_caught"]
 [connection signal="fish_hooked" from="FishSpawnZone" to="." method="_on_fish_spawn_zone_fish_hooked"]
+[connection signal="fish_obstacle_hit" from="FishSpawnZone" to="." method="_on_fish_spawn_zone_fish_obstacle_hit"]
 [connection signal="timeout" from="FishSpawnZone/FishSpawnTimer" to="FishSpawnZone" method="_on_fish_spawn_timer_timeout"]
+[connection signal="timeout" from="ObstacleSpawnZone/ObstacleSpawnTimer" to="ObstacleSpawnZone" method="_on_obstacle_spawn_timer_timeout"]

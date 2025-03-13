@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var throw_charge_timer: Timer = $ThrowChargeTimer
 @onready var player_state_machine: PlayerStateMachine = $PlayerStateMachine
+@onready var sprite_2d: Sprite2D = $Sprite2D
 
 signal throw_hook(throw_distance)
 signal retract_hook
@@ -9,13 +10,14 @@ signal reeling
 signal relaxing
 signal max_tension
 
-const SPEED = 30000.0
+const SPEED = 15000.0
 const MAX_HOOK_THROW_DISTANCE = 500
 const MAX_TENSION = 300
 const MIN_TENSION = 0
 
 var tension = 0
 var raise_tension = false
+var shake = 1
 
 func _ready() -> void:
 	Global.player = self
@@ -32,14 +34,16 @@ func _physics_process(delta: float) -> void:
 	
 	if raise_tension:
 		tension += 100 * delta
-		print("Tension: " + str(tension))
 	else:
 		tension = max(tension - 150 * delta, MIN_TENSION)
-		print("Tension: " + str(tension))
 	if tension >= MAX_TENSION:
 		max_tension.emit()
 		stop_reeling()
-	
+		
+	if tension > MAX_TENSION * 0.7:
+		shake *= -1
+		sprite_2d.position.x += 5 * shake
+		
 	move_and_slide()
 
 func _on_idle_charge_hook() -> void:

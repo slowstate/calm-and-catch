@@ -1,11 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://byy4rowhpjrdf"]
+[gd_scene load_steps=4 format=3 uid="uid://byy4rowhpjrdf"]
 
 [ext_resource type="Texture2D" uid="uid://ckqr0sxc6lsv4" path="res://Log/log.png" id="1_1hqg2"]
+[ext_resource type="Script" path="res://Log/log.gd" id="1_7u568"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tni6k"]
 size = Vector2(58, 19)
 
 [node name="Log" type="Area2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_7u568")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.2, 0.2)

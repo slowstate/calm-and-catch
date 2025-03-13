@@ -9,6 +9,7 @@ var normalised_vector
 var hooked_fish
 var reeling = false
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -21,7 +22,7 @@ func _process(delta: float) -> void:
 			hooked_fish.position += normalised_vector * REELING_SPEED * delta
 		else:
 			hooked_fish.position.y -= 50 * delta
-		if hooked_fish.position.y < fish_spawn_zone.position.y - 100:
+		if hooked_fish.position.y < get_viewport_rect().position.y - 50:
 			reset_hook()
 			stop_reeling_and_reset_fish()
 	
@@ -50,6 +51,9 @@ func _on_fish_spawn_zone_fish_caught(fish: Variant) -> void:
 	stop_reeling_and_reset_fish()
 
 func _on_player_max_tension() -> void:
+	stop_reeling_and_reset_fish()
+
+func _on_fish_spawn_zone_fish_obstacle_hit(fish: Variant) -> void:
 	stop_reeling_and_reset_fish()
 
 func reset_hook():

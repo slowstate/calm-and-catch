@@ -4,7 +4,6 @@ signal reeling
 signal relaxing
 
 func enter() -> void:
-	print("Player Reeling")
 	pass
 	
 func exit() -> void:

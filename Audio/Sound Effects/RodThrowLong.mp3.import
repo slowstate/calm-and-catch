@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cyokbs3gb4kme"
+path="res://.godot/imported/RodThrowLong.mp3-19912eeac33f744e0aaa1a2922d4016b.mp3str"
+
+[deps]
+
+source_file="res://Audio/Sound Effects/RodThrowLong.mp3"
+dest_files=["res://.godot/imported/RodThrowLong.mp3-19912eeac33f744e0aaa1a2922d4016b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

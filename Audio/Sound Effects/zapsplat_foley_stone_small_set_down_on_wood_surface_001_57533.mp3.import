@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d37qon73flo0r"
+path="res://.godot/imported/zapsplat_foley_stone_small_set_down_on_wood_surface_001_57533.mp3-b2fdb44d75a3a8728cbc4bcea9ee9903.mp3str"
+
+[deps]
+
+source_file="res://Audio/Sound Effects/zapsplat_foley_stone_small_set_down_on_wood_surface_001_57533.mp3"
+dest_files=["res://.godot/imported/zapsplat_foley_stone_small_set_down_on_wood_surface_001_57533.mp3-b2fdb44d75a3a8728cbc4bcea9ee9903.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

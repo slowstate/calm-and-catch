@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cghmmr8dtd47p"
+path="res://.godot/imported/FishHooked1.mp3-0e5c68c67477acc013000b9cc3cd1359.mp3str"
+
+[deps]
+
+source_file="res://Audio/Sound Effects/FishHooked1.mp3"
+dest_files=["res://.godot/imported/FishHooked1.mp3-0e5c68c67477acc013000b9cc3cd1359.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

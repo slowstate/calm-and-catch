@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://by2t4rhopdpfi"
+path="res://.godot/imported/Reeling.mp3-e200a7fb8ac5a5a1b86e3967fa84b066.mp3str"
+
+[deps]
+
+source_file="res://Audio/Sound Effects/Reeling.mp3"
+dest_files=["res://.godot/imported/Reeling.mp3-e200a7fb8ac5a5a1b86e3967fa84b066.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

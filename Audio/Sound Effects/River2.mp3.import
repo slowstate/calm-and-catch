@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cknpyksblvpdm"
+path="res://.godot/imported/River2.mp3-e41699fce038163b3a86af0d000ba7c7.mp3str"
+
+[deps]
+
+source_file="res://Audio/Sound Effects/River2.mp3"
+dest_files=["res://.godot/imported/River2.mp3-e41699fce038163b3a86af0d000ba7c7.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

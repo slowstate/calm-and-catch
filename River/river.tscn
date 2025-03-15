@@ -1,10 +1,73 @@
-[gd_scene load_steps=10 format=3 uid="uid://dvkv21wkwo18p"]
+[gd_scene load_steps=27 format=3 uid="uid://dvkv21wkwo18p"]
 
 [ext_resource type="Script" path="res://River/river.gd" id="1_f45dc"]
 [ext_resource type="PackedScene" uid="uid://bhl8fy0l6levh" path="res://Player/player.tscn" id="1_jc3st"]
+[ext_resource type="Texture2D" uid="uid://bddy0te3jijat" path="res://River/BG.png" id="2_56yy5"]
+[ext_resource type="Shader" path="res://River/water.gdshader" id="2_law77"]
+[ext_resource type="Texture2D" uid="uid://j2rxloywsm2" path="res://River/Water.png" id="2_ti7a4"]
 [ext_resource type="Script" path="res://River/fish_spawn_zone.gd" id="2_wj8au"]
+[ext_resource type="Texture2D" uid="uid://da68kncjfba7f" path="res://icon.svg" id="3_xayg8"]
 [ext_resource type="PackedScene" uid="uid://c1mbiqknreisl" path="res://Hook/hook.tscn" id="4_a60od"]
 [ext_resource type="Script" path="res://River/obstacle_spawn_zone.gd" id="5_efqls"]
+[ext_resource type="Texture2D" uid="uid://dqx6tep18poe4" path="res://River/Bank_Water.png" id="5_thesf"]
+[ext_resource type="Shader" path="res://River/bank_water.gdshader" id="6_dd3qo"]
+[ext_resource type="Texture2D" uid="uid://cwbo0ki7v3k55" path="res://River/Bank.png" id="6_kgtjl"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mk6ue"]
+noise_type = 2
+frequency = 0.05
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qrxr6"]
+seamless = true
+noise = SubResource("FastNoiseLite_mk6ue")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ysgt0"]
+noise_type = 2
+frequency = 0.05
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_oivn2"]
+seamless = true
+noise = SubResource("FastNoiseLite_ysgt0")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pbwnt"]
+shader = ExtResource("2_law77")
+shader_parameter/scroll1 = Vector2(-0.04, 0.02)
+shader_parameter/scroll2 = Vector2(-0.05, -0.02)
+shader_parameter/distortion_strength = 0.2
+shader_parameter/tone_color = Color(0.492448, 0.802855, 1, 1)
+shader_parameter/top_color = Color(1, 1, 1, 1)
+shader_parameter/light_start = 0.2
+shader_parameter/light_end = 0.35
+shader_parameter/noise1 = SubResource("NoiseTexture2D_qrxr6")
+shader_parameter/noise2 = SubResource("NoiseTexture2D_oivn2")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_atjnk"]
+noise_type = 2
+frequency = 0.03
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0c183"]
+seamless = true
+noise = SubResource("FastNoiseLite_atjnk")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_cqinj"]
+noise_type = 2
+frequency = 0.03
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_l6i8b"]
+seamless = true
+noise = SubResource("FastNoiseLite_cqinj")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dm4kr"]
+shader = ExtResource("6_dd3qo")
+shader_parameter/scroll1 = Vector2(-0.04, 0.02)
+shader_parameter/scroll2 = Vector2(-0.05, -0.02)
+shader_parameter/distortion_strength = 0.2
+shader_parameter/tone_color = Color(0, 0, 0, 1)
+shader_parameter/top_color = Color(1, 1, 1, 1)
+shader_parameter/light_start = 0.38
+shader_parameter/light_end = 0.4
+shader_parameter/noise1 = SubResource("NoiseTexture2D_0c183")
+shader_parameter/noise2 = SubResource("NoiseTexture2D_l6i8b")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j3qnw"]
 size = Vector2(1152, 300)
@@ -21,12 +84,45 @@ normal = Vector2(-1, 0)
 [node name="River" type="Node2D"]
 script = ExtResource("1_f45dc")
 
-[node name="Water" type="ColorRect" parent="."]
-offset_right = 1152.0
-offset_bottom = 486.0
-color = Color(0.176471, 0.607843, 0.941176, 1)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_56yy5")
+
+[node name="Water" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(576, 324)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_ti7a4")
+
+[node name="BankWater" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(575.916, 458)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("5_thesf")
+
+[node name="WaterShader" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_pbwnt")
+position = Vector2(576, 225.989)
+scale = Vector2(9, 4.67204)
+texture = ExtResource("3_xayg8")
+
+[node name="BankWaterShader" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_dm4kr")
+position = Vector2(576, 621)
+scale = Vector2(8.98694, 4.22638)
+texture = ExtResource("3_xayg8")
+
+[node name="Bank" type="Sprite2D" parent="."]
+visible = false
+z_index = 1
+position = Vector2(576.014, 546.902)
+scale = Vector2(0.599982, 0.599982)
+texture = ExtResource("6_kgtjl")
 
 [node name="Grass" type="ColorRect" parent="."]
+visible = false
 offset_top = 486.0
 offset_right = 1152.0
 offset_bottom = 648.0
@@ -45,6 +141,7 @@ collision_mask = 0
 script = ExtResource("2_wj8au")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FishSpawnZone"]
+position = Vector2(-4, 0)
 shape = SubResource("RectangleShape2D_j3qnw")
 
 [node name="FishSpawnTimer" type="Timer" parent="FishSpawnZone"]

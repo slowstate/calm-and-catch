@@ -9,7 +9,6 @@ var normalised_vector
 var hooked_fish
 var reeling = false
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -25,8 +24,7 @@ func _process(delta: float) -> void:
 		if hooked_fish.position.y < get_viewport_rect().position.y - 50:
 			reset_hook()
 			stop_reeling_and_reset_fish()
-	
-	
+
 func _on_player_throw_hook(throw_distance: Variant) -> void:
 	hook.position.x = player.position.x
 	hook.position.y = player.position.y - throw_distance

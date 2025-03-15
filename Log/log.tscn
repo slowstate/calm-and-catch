@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://byy4rowhpjrdf"]
+[gd_scene load_steps=5 format=3 uid="uid://byy4rowhpjrdf"]
 
 [ext_resource type="Texture2D" uid="uid://ckqr0sxc6lsv4" path="res://Log/log.png" id="1_1hqg2"]
 [ext_resource type="Script" path="res://Log/log.gd" id="1_7u568"]
+[ext_resource type="Script" path="res://Log/trail.gd" id="3_ipty1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tni6k"]
 size = Vector2(58, 19)
@@ -18,3 +19,6 @@ texture = ExtResource("1_1hqg2")
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_tni6k")
+
+[node name="Trail" type="Line2D" parent="."]
+script = ExtResource("3_ipty1")

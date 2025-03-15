@@ -36,8 +36,7 @@ func _process(delta: float) -> void:
 		if hooked_fish.position.y < get_viewport_rect().position.y - 50:
 			reset_hook()
 			stop_reeling_and_reset_fish()
-	
-	
+
 func _on_player_throw_hook(throw_distance: Variant) -> void:
 	hook.position.x = player.position.x
 	hook.position.y = player.position.y - throw_distance
@@ -129,7 +128,8 @@ func reset_hook():
 func stop_reeling_and_reset_fish():
 	reeling = false
 	player.stop_reeling()
-	hooked_fish.queue_free()
+	if hooked_fish != null:
+		hooked_fish.queue_free()
 	fish_spawn_zone.start_fish_spawn_timer()
 
 func play_river_sounds():

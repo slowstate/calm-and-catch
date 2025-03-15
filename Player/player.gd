@@ -5,7 +5,7 @@ extends CharacterBody2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var walking_sfx: AudioStreamPlayer2D = $WalkingSFX
 @onready var rod_throw_short: AudioStreamPlayer2D = $RodThrowShort
-@onready var rod_throw_medium: AudioStreamPlayer2D = $RodThrowMedium
+#@onready var rod_throw_medium: AudioStreamPlayer2D = $RodThrowMedium
 @onready var rod_throw_long: AudioStreamPlayer2D = $RodThrowLong
 @onready var reeling_sfx: AudioStreamPlayer2D = $ReelingSFX
 

@@ -1,26 +1,65 @@
-[gd_scene load_steps=4 format=3 uid="uid://c4mr8y2p40pjp"]
+[gd_scene load_steps=8 format=3 uid="uid://c4mr8y2p40pjp"]
 
 [ext_resource type="Script" path="res://Fish/fish.gd" id="1_pktc1"]
 [ext_resource type="Texture2D" uid="uid://chyyic1dp6ctq" path="res://Fish/fish.png" id="1_yychq"]
+[ext_resource type="Script" path="res://Fish/hook_box.gd" id="3_fjq38"]
+[ext_resource type="Script" path="res://Fish/hit_box.gd" id="4_e26ob"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2bvhk"]
-radius = 54.037
+radius = 1216.78
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hrl4e"]
+radius = 166.667
+height = 633.333
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t5pl3"]
+radius = 133.333
+height = 533.333
 
 [node name="Fish" type="Area2D"]
-collision_mask = 3
+scale = Vector2(0.06, 0.06)
+collision_layer = 0
+collision_mask = 7
 script = ExtResource("1_pktc1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.109375, 0.109375)
 texture = ExtResource("1_yychq")
 
-[node name="Hitbox" type="CollisionShape2D" parent="."]
+[node name="HookBox" type="Area2D" parent="."]
+scale = Vector2(1, 1)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("3_fjq38")
+
+[node name="HookBox" type="CollisionShape2D" parent="HookBox"]
+scale = Vector2(1, 1)
 shape = SubResource("CircleShape2D_2bvhk")
+
+[node name="HitBox" type="Area2D" parent="."]
+scale = Vector2(1, 1)
+collision_layer = 0
+collision_mask = 4
+monitoring = false
+script = ExtResource("4_e26ob")
+
+[node name="HitBox" type="CollisionShape2D" parent="HitBox"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_hrl4e")
 
 [node name="HookedTimer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
 
+[node name="CaughtHitBox" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_t5pl3")
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="area_entered" from="HookBox" to="HookBox" method="_on_area_entered"]
+[connection signal="area_exited" from="HookBox" to="HookBox" method="_on_area_exited"]
+[connection signal="hook_box_entered" from="HookBox" to="." method="_on_hook_box_hook_box_entered"]
+[connection signal="hook_box_exited" from="HookBox" to="." method="_on_hook_box_hook_box_exited"]
+[connection signal="area_entered" from="HitBox" to="HitBox" method="_on_area_entered"]
+[connection signal="hit_box_entered" from="HitBox" to="." method="_on_hit_box_hit_box_entered"]
 [connection signal="timeout" from="HookedTimer" to="." method="_on_hooked_timer_timeout"]

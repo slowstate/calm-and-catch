@@ -1,7 +1,7 @@
 extends Area2D
 
-@onready var hitbox: CollisionShape2D = $Hitbox
 @onready var hooked_timer: Timer = $HookedTimer
+@onready var hit_box: Area2D = $HitBox
 
 signal caught(fish)
 signal hooked(fish)
@@ -19,17 +19,21 @@ func _process(delta: float) -> void:
 		shake *= -1
 		position.x += 5 * shake
 
-func _on_area_entered(area: Area2D) -> void:
-	if area.collision_layer == 2:
-		hooked_timer.wait_time = randi_range(2, 4)
-		hooked_timer.start()
-	elif area.collision_layer == 4:
-		obstacle_hit.emit(self)
-
 func _on_hooked_timer_timeout() -> void:
-	if has_overlapping_areas():
-		set_collision_mask_value(3, true)
-		hooked.emit(self)
+	hooked.emit(self)
+	hit_box.monitoring = true
 
 func _on_body_entered(body: Node2D) -> void:
 	caught.emit(self)
+
+func _on_hook_box_hook_box_entered() -> void:
+	hooked_timer.wait_time = randi_range(2, 4)
+	hooked_timer.start()
+	# TODO: Play hooking animation
+
+func _on_hook_box_hook_box_exited() -> void:
+	# TODO: Stop the hooking animation
+	hooked_timer.stop()
+
+func _on_hit_box_hit_box_entered() -> void:
+	obstacle_hit.emit(self)

@@ -128,7 +128,8 @@ func reset_hook():
 func stop_reeling_and_reset_fish():
 	reeling = false
 	player.stop_reeling()
-	hooked_fish.queue_free()
+	if hooked_fish != null:
+		hooked_fish.queue_free()
 	fish_spawn_zone.start_fish_spawn_timer()
 
 func play_river_sounds():

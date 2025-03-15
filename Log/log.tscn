@@ -4,8 +4,9 @@
 [ext_resource type="Script" path="res://Log/log.gd" id="1_7u568"]
 [ext_resource type="Script" path="res://Log/trail.gd" id="3_ipty1"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tni6k"]
-size = Vector2(58, 19)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hfah3"]
+radius = 10.5
+height = 66.0
 
 [node name="Log" type="Area2D"]
 collision_layer = 4
@@ -18,7 +19,8 @@ texture = ExtResource("1_1hqg2")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1.5)
-shape = SubResource("RectangleShape2D_tni6k")
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_hfah3")
 
 [node name="Trail" type="Line2D" parent="."]
 script = ExtResource("3_ipty1")

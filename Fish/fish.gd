@@ -1,6 +1,7 @@
 extends Area2D
 
 @onready var hooked_timer: Timer = $HookedTimer
+@onready var hook_box: Area2D = $HookBox
 @onready var hit_box: Area2D = $HitBox
 
 signal caught(fish)
@@ -21,6 +22,7 @@ func _process(delta: float) -> void:
 
 func _on_hooked_timer_timeout() -> void:
 	hooked.emit(self)
+	hook_box.monitoring = false
 	hit_box.monitoring = true
 
 func _on_body_entered(body: Node2D) -> void:

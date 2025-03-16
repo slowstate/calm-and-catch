@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bhl8fy0l6levh"]
+[gd_scene load_steps=9 format=3 uid="uid://bhl8fy0l6levh"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_g3ng8"]
 [ext_resource type="Texture2D" uid="uid://bq02nrer4ljja" path="res://Player/player.png" id="1_gejye"]
@@ -6,15 +6,13 @@
 [ext_resource type="Script" path="res://Player/idle.gd" id="4_rrs2i"]
 [ext_resource type="Script" path="res://Player/waiting.gd" id="5_s8tw2"]
 [ext_resource type="Script" path="res://Player/reeling.gd" id="6_q6q68"]
-[ext_resource type="AudioStream" uid="uid://cjfk5sscwdati" path="res://Audio/Sound Effects/Walking.mp3" id="7_t2j3x"]
-[ext_resource type="AudioStream" uid="uid://bfuejduj77q7a" path="res://Audio/Sound Effects/RodThrowShort.mp3" id="8_frdwf"]
-[ext_resource type="AudioStream" uid="uid://cyokbs3gb4kme" path="res://Audio/Sound Effects/RodThrowLong.mp3" id="9_smooi"]
-[ext_resource type="AudioStream" uid="uid://by2t4rhopdpfi" path="res://Audio/Sound Effects/Reeling.mp3" id="10_s7o4l"]
+[ext_resource type="PackedScene" uid="uid://bes8e7lnvdei5" path="res://Common/audio_player.tscn" id="7_4omj6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jbqkx"]
 size = Vector2(34, 107)
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 6
 collision_mask = 8
 script = ExtResource("1_g3ng8")
 
@@ -44,17 +42,7 @@ script = ExtResource("5_s8tw2")
 [node name="Reeling" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("6_q6q68")
 
-[node name="WalkingSFX" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("7_t2j3x")
-
-[node name="RodThrowShort" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("8_frdwf")
-
-[node name="RodThrowLong" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("9_smooi")
-
-[node name="ReelingSFX" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("10_s7o4l")
+[node name="AudioPlayer" parent="." instance=ExtResource("7_4omj6")]
 
 [connection signal="charge_hook" from="PlayerStateMachine/Idle" to="." method="_on_idle_charge_hook"]
 [connection signal="throw_hook" from="PlayerStateMachine/Idle" to="." method="_on_idle_throw_hook"]

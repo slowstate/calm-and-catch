@@ -17,6 +17,7 @@ radius = 133.333
 height = 533.333
 
 [node name="Fish" type="Area2D"]
+z_index = 1
 scale = Vector2(0.06, 0.06)
 collision_layer = 0
 collision_mask = 7
@@ -26,17 +27,14 @@ script = ExtResource("1_pktc1")
 texture = ExtResource("1_yychq")
 
 [node name="HookBox" type="Area2D" parent="."]
-scale = Vector2(1, 1)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("3_fjq38")
 
 [node name="HookBox" type="CollisionShape2D" parent="HookBox"]
-scale = Vector2(1, 1)
 shape = SubResource("CircleShape2D_2bvhk")
 
 [node name="HitBox" type="Area2D" parent="."]
-scale = Vector2(1, 1)
 collision_layer = 0
 collision_mask = 4
 monitoring = false

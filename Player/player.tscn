@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bhl8fy0l6levh"]
+[gd_scene load_steps=13 format=3 uid="uid://bhl8fy0l6levh"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_g3ng8"]
 [ext_resource type="Texture2D" uid="uid://bq02nrer4ljja" path="res://Player/player.png" id="1_gejye"]
@@ -17,6 +17,7 @@ collision_mask = 8
 script = ExtResource("1_g3ng8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(-14, -12.3842)
 scale = Vector2(0.35468, 0.35468)
 texture = ExtResource("1_gejye")
@@ -43,6 +44,9 @@ script = ExtResource("5_s8tw2")
 script = ExtResource("6_q6q68")
 
 [node name="AudioPlayer" parent="." instance=ExtResource("7_4omj6")]
+
+[node name="Character Animation" parent="." instance=ExtResource("11_bge7e")]
+scale = Vector2(0.06, 0.06)
 
 [connection signal="charge_hook" from="PlayerStateMachine/Idle" to="." method="_on_idle_charge_hook"]
 [connection signal="throw_hook" from="PlayerStateMachine/Idle" to="." method="_on_idle_throw_hook"]

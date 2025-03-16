@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bhl8fy0l6levh"]
+[gd_scene load_steps=13 format=3 uid="uid://bhl8fy0l6levh"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_g3ng8"]
 [ext_resource type="Texture2D" uid="uid://bq02nrer4ljja" path="res://Player/player.png" id="1_gejye"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://bfuejduj77q7a" path="res://Audio/Sound Effects/RodThrowShort.mp3" id="8_frdwf"]
 [ext_resource type="AudioStream" uid="uid://cyokbs3gb4kme" path="res://Audio/Sound Effects/RodThrowLong.mp3" id="9_smooi"]
 [ext_resource type="AudioStream" uid="uid://by2t4rhopdpfi" path="res://Audio/Sound Effects/Reeling.mp3" id="10_s7o4l"]
+[ext_resource type="PackedScene" uid="uid://cnadeovyygmfd" path="res://Player/Character/character_animation.tscn" id="11_bge7e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jbqkx"]
 size = Vector2(34, 107)
@@ -19,6 +20,7 @@ collision_mask = 8
 script = ExtResource("1_g3ng8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(-14, -12.3842)
 scale = Vector2(0.35468, 0.35468)
 texture = ExtResource("1_gejye")
@@ -55,6 +57,9 @@ stream = ExtResource("9_smooi")
 
 [node name="ReelingSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_s7o4l")
+
+[node name="Character Animation" parent="." instance=ExtResource("11_bge7e")]
+scale = Vector2(0.06, 0.06)
 
 [connection signal="charge_hook" from="PlayerStateMachine/Idle" to="." method="_on_idle_charge_hook"]
 [connection signal="throw_hook" from="PlayerStateMachine/Idle" to="." method="_on_idle_throw_hook"]

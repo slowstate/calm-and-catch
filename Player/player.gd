@@ -8,6 +8,7 @@ extends CharacterBody2D
 #@onready var rod_throw_medium: AudioStreamPlayer2D = $RodThrowMedium
 @onready var rod_throw_long: AudioStreamPlayer2D = $RodThrowLong
 @onready var reeling_sfx: AudioStreamPlayer2D = $ReelingSFX
+@onready var character_animation: Node2D = $"Character Animation"
 
 signal throw_hook(throw_distance)
 signal retract_hook
@@ -15,7 +16,7 @@ signal reeling
 signal relaxing
 signal max_tension
 
-const SPEED = 15000.0
+const SPEED = 5000.0
 const MAX_HOOK_THROW_DISTANCE = 500
 const MAX_TENSION = 300
 const MIN_TENSION = 0
@@ -32,10 +33,13 @@ func _physics_process(delta: float) -> void:
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	if Input.is_action_pressed("player_move_left"):
 		velocity.x = -SPEED * delta
+		character_animation.play_animation("Walk_Left")
 	elif Input.is_action_pressed("player_move_right"):
 		velocity.x = SPEED * delta
+		character_animation.play_animation("Walk_Right")
 	else:
 		velocity.x = 0
+		character_animation.play_animation("Idle")
 		#walking_sfx.stop()
 	
 	#Walking sound effects

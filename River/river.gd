@@ -2,32 +2,34 @@ extends Node2D
 
 @onready var player: CharacterBody2D = $Player
 @onready var hook: Area2D = $Hook
+@onready var hook_line: Line2D = $HookLine
 @onready var fish_spawn_zone: Area2D = $FishSpawnZone
-@onready var hook_hit_water_1: AudioStreamPlayer2D = $HookHitWater1
-@onready var hook_hit_water_2: AudioStreamPlayer2D = $HookHitWater2
-@onready var fish_hooked_1: AudioStreamPlayer2D = $FishHooked1
-@onready var fish_hooked_2: AudioStreamPlayer2D = $FishHooked2
-@onready var fish_escape_1: AudioStreamPlayer2D = $FishEscape1
-@onready var fish_escape_2: AudioStreamPlayer2D = $FishEscape2
-@onready var fish_caught_1: AudioStreamPlayer2D = $FishCaught1
-@onready var fish_caught_2: AudioStreamPlayer2D = $FishCaught2
-@onready var river_1: AudioStreamPlayer2D = $River1
-@onready var river_2: AudioStreamPlayer2D = $River2
-
+@onready var audio_player: Node2D = $AudioPlayer
 
 const REELING_SPEED = 100
+const HOOK_THROW_SPEED = 10
 var normalised_vector
+var hook_throw_distance
 var hooked_fish
 var reeling = false
-var sound_picker
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	play_river_sounds()
+	hook.visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if hook.visible:
+		draw_hook_line(true, hook.position)
+		if hook.position.y > player.position.y - hook_throw_distance+3:
+			hook.position.y = lerp(hook.position.y, player.position.y - hook_throw_distance, delta * HOOK_THROW_SPEED)
+		else:
+			hook.enable_collision(true)
+	else:
+		draw_hook_line(false)
+	
 	if hooked_fish != null:
+		draw_hook_line(true, hooked_fish.position)
 		if reeling:
 			normalised_vector = (player.position-hooked_fish.position).normalized()
 			hooked_fish.position += normalised_vector * REELING_SPEED * delta
@@ -36,47 +38,33 @@ func _process(delta: float) -> void:
 		if hooked_fish.position.y < get_viewport_rect().position.y - 50:
 			reset_hook()
 			stop_reeling_and_reset_fish()
+			audio_player.play_random_sound(["FishEscape1", "FishEscape2"])
+	
+	if !audio_player.is_playing("River1") && !audio_player.is_playing("River2"):
+		audio_player.play_random_sound(["River1", "River2"], -10, -5)
 
+func draw_hook_line(visible: bool, to_position: Vector2 = player.position, from_position: Vector2 = player.position):
+	hook_line.set_point_position(0, from_position)
+	hook_line.set_point_position(1, to_position + Vector2(0, -5))
+	hook_line.visible = visible
+	
 func _on_player_throw_hook(throw_distance: Variant) -> void:
-	hook.position.x = player.position.x
-	hook.position.y = player.position.y - throw_distance
+	hook.position = player.position
+	hook_throw_distance = throw_distance
 	hook.visible = true
-	sound_picker = randf_range(0,2)
-	if sound_picker <= 1:
-		hook_hit_water_1.volume_db = randf_range(-5,0)
-		hook_hit_water_1.pitch_scale = randf_range(0.8,1.2)
-		hook_hit_water_1.play()
-	else:
-		hook_hit_water_2.volume_db = randf_range(-5,0)
-		hook_hit_water_2.pitch_scale = randf_range(0.8,1.2)
-		hook_hit_water_2.play()
+	await get_tree().create_timer(throw_distance/player.MAX_HOOK_THROW_DISTANCE*0.25).timeout
+	audio_player.play_random_sound(["HookHitWater1", "HookHitWater2"])
 
 func _on_player_retract_hook() -> void:
 	reset_hook()
-	sound_picker = randf_range(0,2)
-	if sound_picker <= 1:
-		hook_hit_water_1.volume_db = randf_range(-5,0)
-		hook_hit_water_1.pitch_scale = randf_range(0.8,1.2)
-		hook_hit_water_1.play()
-	else:
-		hook_hit_water_2.volume_db = randf_range(-5,0)
-		hook_hit_water_2.pitch_scale = randf_range(0.8,1.2)
-		hook_hit_water_2.play()
+	audio_player.play_random_sound(["HookHitWater1", "HookHitWater2"])
 
 func _on_fish_spawn_zone_fish_hooked(fish: Variant) -> void:
 	reset_hook()
 	player.begin_reeling()
 	hooked_fish = fish
 	hook.visible = false
-	sound_picker  = randf_range(0,2)
-	if sound_picker <= 1:
-		fish_hooked_1.volume_db = randf_range(-5,0)
-		fish_hooked_1.pitch_scale = randf_range(0.8,1.2)
-		fish_hooked_1.play()
-	else:
-		fish_hooked_2.volume_db = randf_range(-5,0)
-		fish_hooked_2.pitch_scale = randf_range(0.8,1.2)
-		fish_hooked_2.play()
+	audio_player.play_random_sound(["FishHooked1", "FishHooked2"])
 
 func _on_player_reeling() -> void:
 	reeling = true
@@ -86,41 +74,18 @@ func _on_player_relaxing() -> void:
 
 func _on_fish_spawn_zone_fish_caught(fish: Variant) -> void:
 	stop_reeling_and_reset_fish()
-	sound_picker  = randf_range(0,2)
-	if sound_picker <= 1:
-		fish_caught_1.volume_db = randf_range(-5,0)
-		fish_caught_1.pitch_scale = randf_range(0.8,1.2)
-		fish_caught_1.play()
-	else:
-		fish_caught_2.volume_db = randf_range(-5,0)
-		fish_caught_2.pitch_scale = randf_range(0.8,1.2)
-		fish_caught_2.play()
+	audio_player.play_random_sound(["FishCaught1", "FishCaught2"])
 
 func _on_player_max_tension() -> void:
 	stop_reeling_and_reset_fish()
-	sound_picker  = randf_range(0,2)
-	if sound_picker <= 1:
-		fish_escape_1.volume_db = randf_range(-5,0)
-		fish_escape_1.pitch_scale = randf_range(0.8,1.2)
-		fish_escape_1.play()
-	else:
-		fish_escape_2.volume_db = randf_range(-5,0)
-		fish_escape_2.pitch_scale = randf_range(0.8,1.2)
-		fish_escape_2.play()
+	audio_player.play_random_sound(["FishEscape1", "FishEscape2"])
 
 func _on_fish_spawn_zone_fish_obstacle_hit(fish: Variant) -> void:
 	stop_reeling_and_reset_fish()
-	sound_picker  = randf_range(0,2)
-	if sound_picker <= 1:
-		fish_escape_1.volume_db = randf_range(-5,0)
-		fish_escape_1.pitch_scale = randf_range(0.8,1.2)
-		fish_escape_1.play()
-	else:
-		fish_escape_2.volume_db = randf_range(-5,0)
-		fish_escape_2.pitch_scale = randf_range(0.8,1.2)
-		fish_escape_2.play()
+	audio_player.play_random_sound(["FishEscape1", "FishEscape2"])
 
 func reset_hook():
+	hook.enable_collision(false)
 	hook.position.x = player.position.x
 	hook.position.y = player.position.y
 	hook.visible = false
@@ -132,19 +97,8 @@ func stop_reeling_and_reset_fish():
 		hooked_fish.queue_free()
 	fish_spawn_zone.start_fish_spawn_timer()
 
-func play_river_sounds():
-	sound_picker = randf_range(0,2)
-	if sound_picker <=1:
-		river_1.volume_db = randf_range(-10,-5)
-		river_1.pitch_scale = randf_range(0.8,1.2)
-		river_1.play()
-	else:
-		river_2.volume_db = randf_range(-10,-5)
-		river_2.pitch_scale = randf_range(0.8,1.2)
-		river_2.play()
-
 func _on_river_1_finished() -> void:
-	play_river_sounds()
+	audio_player.play_random_sound(["River1", "River2"], -10, -5)
 
 func _on_river_2_finished() -> void:
-	play_river_sounds()
+	audio_player.play_random_sound(["River1", "River2"], -10, -5)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dvkv21wkwo18p"]
+[gd_scene load_steps=21 format=3 uid="uid://dvkv21wkwo18p"]
 
 [ext_resource type="Script" path="res://River/river.gd" id="1_f45dc"]
 [ext_resource type="PackedScene" uid="uid://bhl8fy0l6levh" path="res://Player/player.tscn" id="1_jc3st"]
@@ -8,16 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://da68kncjfba7f" path="res://icon.svg" id="3_xayg8"]
 [ext_resource type="PackedScene" uid="uid://c1mbiqknreisl" path="res://Hook/hook.tscn" id="4_a60od"]
 [ext_resource type="Script" path="res://River/obstacle_spawn_zone.gd" id="5_efqls"]
-[ext_resource type="AudioStream" uid="uid://dix3dgwhorurr" path="res://Audio/Sound Effects/HookHitWater1.mp3" id="6_mdngv"]
-[ext_resource type="AudioStream" uid="uid://bbhbntirwvcgo" path="res://Audio/Sound Effects/HookHitWater2.mp3" id="8_egg8d"]
-[ext_resource type="AudioStream" uid="uid://cghmmr8dtd47p" path="res://Audio/Sound Effects/FishHooked1.mp3" id="8_x58ew"]
-[ext_resource type="AudioStream" uid="uid://dkcmc2gn6f40t" path="res://Audio/Sound Effects/FishHooked2.mp3" id="9_7hg0p"]
-[ext_resource type="AudioStream" uid="uid://cjhsqwape3n1n" path="res://Audio/Sound Effects/FishEscape1.mp3" id="10_4dwc5"]
-[ext_resource type="AudioStream" uid="uid://vn78rf5p1vha" path="res://Audio/Sound Effects/FishEscape2.mp3" id="11_bt30i"]
-[ext_resource type="AudioStream" uid="uid://605oriyq2h3e" path="res://Audio/Sound Effects/FishCaught1.mp3" id="12_bwesj"]
-[ext_resource type="AudioStream" uid="uid://8f2bmth1b1p" path="res://Audio/Sound Effects/FishCaught2.mp3" id="13_wufrq"]
-[ext_resource type="AudioStream" uid="uid://bd6negd83nck5" path="res://Audio/Sound Effects/River1.mp3" id="14_aaw3f"]
-[ext_resource type="AudioStream" uid="uid://cknpyksblvpdm" path="res://Audio/Sound Effects/River2.mp3" id="15_46tls"]
+[ext_resource type="Texture2D" uid="uid://4x4j1fhhhikm" path="res://River/Lily.png" id="5_j0r74"]
+[ext_resource type="Script" path="res://River/lily.gd" id="6_kwcog"]
+[ext_resource type="PackedScene" uid="uid://bes8e7lnvdei5" path="res://Common/audio_player.tscn" id="9_dfmyq"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_mk6ue"]
 noise_type = 2
@@ -48,7 +41,7 @@ shader_parameter/noise1 = SubResource("NoiseTexture2D_qrxr6")
 shader_parameter/noise2 = SubResource("NoiseTexture2D_oivn2")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j3qnw"]
-size = Vector2(1152, 300)
+size = Vector2(1100, 300)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d3h43"]
 size = Vector2(1, 350)
@@ -68,16 +61,28 @@ scale = Vector2(0.6, 0.6)
 texture = ExtResource("2_56yy5")
 
 [node name="WaterShader" type="Sprite2D" parent="."]
+z_index = 2
 material = SubResource("ShaderMaterial_pbwnt")
-position = Vector2(576, 225.989)
-scale = Vector2(9, 4.67204)
+position = Vector2(576, 262.5)
+scale = Vector2(9, 4.10156)
 texture = ExtResource("3_xayg8")
 
+[node name="Lily" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(576, 437)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("5_j0r74")
+script = ExtResource("6_kwcog")
+
 [node name="Player" parent="." instance=ExtResource("1_jc3st")]
-z_index = 1
 position = Vector2(532, 472)
 
 [node name="Hook" parent="." instance=ExtResource("4_a60od")]
+
+[node name="HookLine" type="Line2D" parent="."]
+z_index = 5
+points = PackedVector2Array(0, 0, 0, 0)
+width = 1.0
 
 [node name="FishSpawnZone" type="Area2D" parent="."]
 position = Vector2(580, 200)
@@ -122,35 +127,7 @@ collision_mask = 0
 position = Vector2(1152, 486)
 shape = SubResource("WorldBoundaryShape2D_2ullu")
 
-[node name="HookHitWater1" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("6_mdngv")
-
-[node name="HookHitWater2" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("8_egg8d")
-
-[node name="FishHooked1" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("8_x58ew")
-
-[node name="FishHooked2" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("9_7hg0p")
-
-[node name="FishEscape1" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("10_4dwc5")
-
-[node name="FishEscape2" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("11_bt30i")
-
-[node name="FishCaught1" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("12_bwesj")
-
-[node name="FishCaught2" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("13_wufrq")
-
-[node name="River1" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("14_aaw3f")
-
-[node name="River2" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("15_46tls")
+[node name="AudioPlayer" parent="." instance=ExtResource("9_dfmyq")]
 
 [connection signal="max_tension" from="Player" to="." method="_on_player_max_tension"]
 [connection signal="reeling" from="Player" to="." method="_on_player_reeling"]
@@ -162,5 +139,3 @@ stream = ExtResource("15_46tls")
 [connection signal="fish_obstacle_hit" from="FishSpawnZone" to="." method="_on_fish_spawn_zone_fish_obstacle_hit"]
 [connection signal="timeout" from="FishSpawnZone/FishSpawnTimer" to="FishSpawnZone" method="_on_fish_spawn_timer_timeout"]
 [connection signal="timeout" from="ObstacleSpawnZone/ObstacleSpawnTimer" to="ObstacleSpawnZone" method="_on_obstacle_spawn_timer_timeout"]
-[connection signal="finished" from="River1" to="." method="_on_river_1_finished"]
-[connection signal="finished" from="River2" to="." method="_on_river_2_finished"]

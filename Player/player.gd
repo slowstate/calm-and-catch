@@ -3,12 +3,7 @@ extends CharacterBody2D
 @onready var throw_charge_timer: Timer = $ThrowChargeTimer
 @onready var player_state_machine: PlayerStateMachine = $PlayerStateMachine
 @onready var sprite_2d: Sprite2D = $Sprite2D
-@onready var walking_sfx: AudioStreamPlayer2D = $WalkingSFX
-@onready var rod_throw_short: AudioStreamPlayer2D = $RodThrowShort
-#@onready var rod_throw_medium: AudioStreamPlayer2D = $RodThrowMedium
-@onready var rod_throw_long: AudioStreamPlayer2D = $RodThrowLong
-@onready var reeling_sfx: AudioStreamPlayer2D = $ReelingSFX
-@onready var character_animation: Node2D = $"Character Animation"
+@onready var audio_player: Node2D = $AudioPlayer
 
 signal throw_hook(throw_distance)
 signal retract_hook
@@ -44,10 +39,10 @@ func _physics_process(delta: float) -> void:
 	
 	#Walking sound effects
 	if velocity.x != 0:
-		if !walking_sfx.playing:
-			walking_sfx.play()
-	elif walking_sfx.playing:
-		walking_sfx.stop()
+		if !audio_player.is_playing("WalkingSFX"):
+			audio_player.play_sound("WalkingSFX")
+	elif audio_player.is_playing("WalkingSFX"):
+		audio_player.stop_sound("WalkingSFX")
 	
 
 	if raise_tension:
@@ -74,13 +69,9 @@ func _on_idle_throw_hook() -> void:
 	var throw_distance = MAX_HOOK_THROW_DISTANCE * charge_percentage
 	throw_hook.emit(throw_distance)
 	if throw_distance <= 1.5:
-		rod_throw_short.volume_db = randf_range(-5,0)
-		rod_throw_short.pitch_scale = randf_range(0.9,1.1)
-		rod_throw_short.play()
+		audio_player.play_sound("RodThrowShort")
 	else:
-		rod_throw_long.volume_db = randf_range(-5,0)
-		rod_throw_long.pitch_scale = randf_range(0.9,1.1)
-		rod_throw_long.play()
+		audio_player.play_sound("RodThrowLong")
 
 func _on_waiting_retract_hook() -> void:
 	retract_hook.emit()
@@ -90,19 +81,19 @@ func begin_reeling():
 
 func _on_reeling_reeling() -> void:
 	raise_tension = true
+	tension += 30
 	reeling.emit()
-	if !reeling_sfx.playing:
-		reeling_sfx.play()
-	
+	if !audio_player.is_playing("ReelingSFX"):
+		audio_player.play_sound("ReelingSFX")
 
 func _on_reeling_relaxing() -> void:
 	raise_tension = false
 	relaxing.emit()
-	if reeling_sfx.playing:
-		reeling_sfx.stop()
+	if audio_player.is_playing("ReelingSFX"):
+		audio_player.stop_sound("ReelingSFX")
 
 func stop_reeling():
 	raise_tension = false
 	player_state_machine.on_child_transition("Idle")
-	if reeling_sfx.playing:
-		reeling_sfx.stop()
+	if audio_player.is_playing("ReelingSFX"):
+		audio_player.stop_sound("ReelingSFX")

@@ -27,7 +27,9 @@ func _process(delta: float) -> void:
 			hook.position.y = lerp(hook.position.y, player.position.y - hook_throw_distance, delta * HOOK_THROW_SPEED)
 		else:
 			hook.enable_collision(true)
+			hook.set_bobbing(true)
 	else:
+		hook.set_bobbing(false)
 		draw_hook_line(false)
 	
 	if hooked_fish != null:

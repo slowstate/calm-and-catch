@@ -28,10 +28,10 @@ func _on_fish_spawn_timer_timeout() -> void:
 
 
 func random_spawn_location() -> Vector2:
-	var spawn_x_min = position.x - collision_shape_2d.shape.get_rect().size.x/2
-	var spawn_x_max = position.x + collision_shape_2d.shape.get_rect().size.x/2
-	var spawn_y_min = position.y - collision_shape_2d.shape.get_rect().size.y/2
-	var spawn_y_max = position.y + collision_shape_2d.shape.get_rect().size.y/2
+	var spawn_x_min = collision_shape_2d.global_position.x - collision_shape_2d.shape.get_rect().size.x/2
+	var spawn_x_max = collision_shape_2d.global_position.x + collision_shape_2d.shape.get_rect().size.x/2
+	var spawn_y_min = collision_shape_2d.global_position.y - collision_shape_2d.shape.get_rect().size.y/2
+	var spawn_y_max = collision_shape_2d.global_position.y + collision_shape_2d.shape.get_rect().size.y/2
 	var spawn_location = Vector2(randi_range(spawn_x_min, spawn_x_max), randi_range(spawn_y_min, spawn_y_max))
 	return spawn_location
 

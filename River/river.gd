@@ -10,7 +10,7 @@ const REELING_SPEED = 100
 const HOOK_THROW_SPEED = 10
 var normalised_vector
 var hook_throw_distance
-var hooked_fish
+var hooked_fish: Area2D
 var reeling = false
 
 # Called when the node enters the scene tree for the first time.
@@ -20,7 +20,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if hook.visible:
-		draw_hook_line(true, hook.position)
+		draw_hook_line(true, hook.position + Vector2(0, -5))
 		if hook.position.y > player.position.y - hook_throw_distance+3:
 			hook.position.y = lerp(hook.position.y, player.position.y - hook_throw_distance, delta * HOOK_THROW_SPEED)
 		else:
@@ -29,12 +29,18 @@ func _process(delta: float) -> void:
 		draw_hook_line(false)
 	
 	if hooked_fish != null:
-		draw_hook_line(true, hooked_fish.position)
 		if reeling:
 			normalised_vector = (player.position-hooked_fish.position).normalized()
 			hooked_fish.position += normalised_vector * REELING_SPEED * delta
+			# TODO: Rotate fish based on player angle + draw hook line to fish head
+			print("rotation: " + str(rad_to_deg(normalised_vector.angle())))
+			#hooked_fish.rotation = normalised_vector.angle() - deg_to_rad(90) + deg_to_rad(14)
+			hooked_fish.rotation = deg_to_rad(14)
+			draw_hook_line(true, hooked_fish.position)
 		else:
 			hooked_fish.position.y -= 50 * delta
+			hooked_fish.rotation = deg_to_rad(180 + 14)
+			draw_hook_line(true, hooked_fish.position)
 		if hooked_fish.position.y < get_viewport_rect().position.y - 50:
 			reset_hook()
 			stop_reeling_and_reset_fish()
@@ -43,9 +49,9 @@ func _process(delta: float) -> void:
 	if !audio_player.is_playing("River1") && !audio_player.is_playing("River2"):
 		audio_player.play_random_sound(["River1", "River2"], -10, -5)
 
-func draw_hook_line(visible: bool, to_position: Vector2 = player.position, from_position: Vector2 = player.position):
+func draw_hook_line(visible: bool, to_position: Vector2 = player.position, from_position: Vector2 = player.get_rod_tip_global_position()):
 	hook_line.set_point_position(0, from_position)
-	hook_line.set_point_position(1, to_position + Vector2(0, -5))
+	hook_line.set_point_position(1, to_position)
 	hook_line.visible = visible
 	
 func _on_player_throw_hook(throw_distance: Variant) -> void:

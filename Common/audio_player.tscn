@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bes8e7lnvdei5"]
+[gd_scene load_steps=17 format=3 uid="uid://bes8e7lnvdei5"]
 
 [ext_resource type="Script" path="res://River/audio_player.gd" id="1_d5fut"]
 [ext_resource type="AudioStream" uid="uid://dix3dgwhorurr" path="res://Audio/Sound Effects/HookHitWater1.mp3" id="2_3hq6o"]
@@ -15,6 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://bfuejduj77q7a" path="res://Audio/Sound Effects/RodThrowShort.mp3" id="13_cnvw7"]
 [ext_resource type="AudioStream" uid="uid://cyokbs3gb4kme" path="res://Audio/Sound Effects/RodThrowLong.mp3" id="14_5gajx"]
 [ext_resource type="AudioStream" uid="uid://by2t4rhopdpfi" path="res://Audio/Sound Effects/Reeling.mp3" id="15_0vnpx"]
+[ext_resource type="AudioStream" uid="uid://bd26hs01xu7y2" path="res://Audio/Music/Yellow River.wav" id="16_lpbbi"]
 
 [node name="AudioPlayer" type="Node2D"]
 script = ExtResource("1_d5fut")
@@ -60,3 +61,6 @@ stream = ExtResource("14_5gajx")
 
 [node name="ReelingSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("15_0vnpx")
+
+[node name="BGM" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_lpbbi")

@@ -16,6 +16,7 @@ var reeling = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	hook.visible = false
+	audio_player.play_sound("BGM",10,10,1,1)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -47,7 +48,7 @@ func _process(delta: float) -> void:
 			audio_player.play_random_sound(["FishEscape1", "FishEscape2"])
 	
 	if !audio_player.is_playing("River1") && !audio_player.is_playing("River2"):
-		audio_player.play_random_sound(["River1", "River2"], -10, -5)
+		audio_player.play_random_sound(["River1", "River2"], -20, -10)
 
 func draw_hook_line(visible: bool, to_position: Vector2 = player.position, from_position: Vector2 = player.get_rod_tip_global_position()):
 	hook_line.set_point_position(0, from_position)

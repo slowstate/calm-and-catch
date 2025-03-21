@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://cr8qmil0rhuxb"]
+[gd_scene load_steps=10 format=3 uid="uid://cr8qmil0rhuxb"]
 
 [ext_resource type="Script" path="res://Boat/boat.gd" id="1_pcnpa"]
-[ext_resource type="Texture2D" uid="uid://c3ebg44u1cs1o" path="res://Boat/boat.png" id="1_s1oun"]
-[ext_resource type="Texture2D" uid="uid://c3ebg44u1cs1o" path="res://Boat/Boat.png" id="3_pcnjt"]
+[ext_resource type="Texture2D" uid="uid://bhuca3asjxiri" path="res://Boat/boat.png" id="3_pcnjt"]
 [ext_resource type="Script" path="res://trail.gd" id="4_plq2m"]
 [ext_resource type="Texture2D" uid="uid://bddy0te3jijat" path="res://River/BG.png" id="5_b6v87"]
 [ext_resource type="Texture2D" uid="uid://bqt43vmy53j3u" path="res://Boat/Oar.png" id="5_mrr2s"]
@@ -59,7 +58,7 @@ script = ExtResource("1_pcnpa")
 visible = false
 position = Vector2(0, -28)
 scale = Vector2(0.8, 0.8)
-texture = ExtResource("1_s1oun")
+texture = ExtResource("3_pcnjt")
 
 [node name="Boat" type="Sprite2D" parent="."]
 position = Vector2(0, -1)

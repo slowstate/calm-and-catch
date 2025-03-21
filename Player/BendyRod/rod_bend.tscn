@@ -1,11 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://b06lg3vfd3qoq"]
+[gd_scene load_steps=11 format=3 uid="uid://b06lg3vfd3qoq"]
 
-[ext_resource type="Texture2D" uid="uid://x8h8byf12v8p" path="res://Rod/1.png" id="1_arp5w"]
-[ext_resource type="Texture2D" uid="uid://d2cvnsmibby8p" path="res://Rod/2.png" id="2_0flp6"]
-[ext_resource type="Texture2D" uid="uid://cjjawhg8vqjpk" path="res://Rod/3.png" id="3_y1fn6"]
-[ext_resource type="Texture2D" uid="uid://h1yf3dd76ss5" path="res://Rod/4.png" id="4_6edgg"]
-[ext_resource type="Texture2D" uid="uid://y8s0arpuqyyt" path="res://Rod/5.png" id="5_ixj8x"]
-[ext_resource type="Texture2D" uid="uid://b05p0p17pgok8" path="res://Rod/6.png" id="6_578w8"]
+[ext_resource type="Texture2D" uid="uid://x8h8byf12v8p" path="res://Player/BendyRod/1.png" id="1_arp5w"]
+[ext_resource type="Script" path="res://Player/BendyRod/rod_bend.gd" id="1_hjv5a"]
+[ext_resource type="Texture2D" uid="uid://d2cvnsmibby8p" path="res://Player/BendyRod/2.png" id="2_0flp6"]
+[ext_resource type="Texture2D" uid="uid://cjjawhg8vqjpk" path="res://Player/BendyRod/3.png" id="3_y1fn6"]
+[ext_resource type="Texture2D" uid="uid://h1yf3dd76ss5" path="res://Player/BendyRod/4.png" id="4_6edgg"]
+[ext_resource type="Texture2D" uid="uid://y8s0arpuqyyt" path="res://Player/BendyRod/5.png" id="5_ixj8x"]
+[ext_resource type="Texture2D" uid="uid://b05p0p17pgok8" path="res://Player/BendyRod/6.png" id="6_578w8"]
 
 [sub_resource type="SkeletonModification2DCCDIK" id="SkeletonModification2DCCDIK_prfrc"]
 target_nodepath = NodePath("../../Node2D/Target")
@@ -74,48 +75,52 @@ modifications/0 = SubResource("SkeletonModification2DCCDIK_prfrc")
 modifications/1 = SubResource("SkeletonModification2DLookAt_q4yvi")
 
 [node name="Rod" type="Node2D"]
+script = ExtResource("1_hjv5a")
 
 [node name="Body" type="Node2D" parent="."]
 
 [node name="1" type="Sprite2D" parent="Body"]
-position = Vector2(8.77873, -101.007)
-rotation = 0.028589
-scale = Vector2(0.999969, 0.999969)
+position = Vector2(9.59291, -101.029)
+rotation = 0.0327915
+scale = Vector2(1.00012, 1.00012)
 texture = ExtResource("1_arp5w")
 offset = Vector2(0, -4)
 
+[node name="RodTip" type="Sprite2D" parent="Body/1"]
+position = Vector2(0.145524, -7.97887)
+
 [node name="2" type="Sprite2D" parent="Body"]
-position = Vector2(8.83716, -90.002)
-rotation = -0.00530719
-scale = Vector2(0.99998, 0.99998)
+position = Vector2(9.6124, -90.0162)
+rotation = -0.00178005
+scale = Vector2(1.00017, 1.00017)
 texture = ExtResource("2_0flp6")
 offset = Vector2(0, -6)
 
 [node name="3" type="Sprite2D" parent="Body"]
-position = Vector2(8.92742, -73.0048)
-rotation = -0.00530965
-scale = Vector2(0.999978, 0.999978)
+position = Vector2(9.64251, -73.009)
+rotation = -0.00176783
+scale = Vector2(1.00016, 1.00016)
 texture = ExtResource("3_y1fn6")
 offset = Vector2(0, -9)
 
 [node name="4" type="Sprite2D" parent="Body"]
-position = Vector2(9.03362, -53.0036)
-rotation = -0.00530792
-scale = Vector2(0.999977, 0.999977)
+position = Vector2(9.67792, -53.0055)
+rotation = -0.00177569
+scale = Vector2(1.00016, 1.00016)
 texture = ExtResource("4_6edgg")
 offset = Vector2(0, -10)
 
 [node name="5" type="Sprite2D" parent="Body"]
-position = Vector2(9.1823, -25.003)
-rotation = -0.00530873
-scale = Vector2(0.999977, 0.999977)
+position = Vector2(9.72749, -24.9975)
+rotation = -0.00177205
+scale = Vector2(1.00022, 1.00022)
 texture = ExtResource("5_ixj8x")
 offset = Vector2(0, -13)
 
 [node name="6" type="Sprite2D" parent="Body"]
-position = Vector2(9.9097, 112)
-rotation = -0.00531274
-scale = Vector2(0.999999, 0.999999)
+position = Vector2(9.97, 112.003)
+rotation = -0.00176555
+scale = Vector2(0.999841, 0.999841)
 texture = ExtResource("6_578w8")
 offset = Vector2(0, -69)
 
@@ -189,7 +194,7 @@ remote_path = NodePath("../../../../Body/6")
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="Target" type="Node2D" parent="Node2D"]
-position = Vector2(7, -436)
+position = Vector2(9, -436)
 
 [node name="Lookat" type="Node2D" parent="Node2D/Target"]
 position = Vector2(-4, 53)

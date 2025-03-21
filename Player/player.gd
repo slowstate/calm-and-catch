@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var audio_player: Node2D = $AudioPlayer
 @onready var character_animation: Node2D = $"Character Animation"
 @onready var rod_animation: Node2D = $RodAnimation
+@onready var rod: Node2D = $Rod
 
 signal throw_hook(throw_distance)
 signal retract_hook
@@ -24,6 +25,7 @@ var shake = 1
 
 func _ready() -> void:
 	Global.player = self
+	reset_rod_target()
 
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
@@ -80,6 +82,7 @@ func _on_idle_throw_hook() -> void:
 		audio_player.play_sound("RodThrowLong")
 
 func _on_waiting_retract_hook() -> void:
+	reset_rod_target()
 	retract_hook.emit()
 
 func begin_reeling(Fish: Global.Fish):
@@ -106,10 +109,18 @@ func _on_reeling_relaxing() -> void:
 		audio_player.stop_sound("ReelingSFX")
 
 func stop_reeling():
+	reset_rod_target()
 	raise_tension = false
 	player_state_machine.on_child_transition("Idle")
 	if audio_player.is_playing("ReelingSFX"):
 		audio_player.stop_sound("ReelingSFX")
 
 func get_rod_tip_global_position() -> Vector2:
-	return rod_animation.get_rod_tip_global_position()
+	#return rod_animation.get_rod_tip_global_position()
+	return rod.get_rod_tip_global_position()
+
+func set_rod_bend_target(target_position: Vector2):
+	rod.set_target(target_position)
+
+func reset_rod_target():
+	rod.reset_target()

@@ -22,6 +22,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if hook.visible:
+		player.set_rod_bend_target(hook.position)
 		draw_hook_line(true, hook.position + Vector2(0, -5))
 		if hook.position.y > player.position.y - hook_throw_distance+3:
 			hook.position.y = lerp(hook.position.y, player.position.y - hook_throw_distance, delta * HOOK_THROW_SPEED)
@@ -33,6 +34,7 @@ func _process(delta: float) -> void:
 		draw_hook_line(false)
 	
 	if hooked_fish != null:
+		player.set_rod_bend_target(hooked_fish.position)
 		if reeling:
 			normalised_vector = (player.position-hooked_fish.position).normalized()
 			hooked_fish.position += normalised_vector * REELING_SPEED * delta

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://h1yf3dd76ss5"
-path="res://.godot/imported/4.png-a14be34013c5717b887602bb13c01631.ctex"
+uid="uid://x8h8byf12v8p"
+path="res://.godot/imported/1.png-7f827d7694c7e93224e29bf9420c98ad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Rod/4.png"
-dest_files=["res://.godot/imported/4.png-a14be34013c5717b887602bb13c01631.ctex"]
+source_file="res://Player/BendyRod/1.png"
+dest_files=["res://.godot/imported/1.png-7f827d7694c7e93224e29bf9420c98ad.ctex"]
 
 [params]
 

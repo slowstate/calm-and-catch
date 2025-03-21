@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dvkv21wkwo18p"]
+[gd_scene load_steps=22 format=3 uid="uid://dvkv21wkwo18p"]
 
 [ext_resource type="Script" path="res://River/river.gd" id="1_f45dc"]
 [ext_resource type="PackedScene" uid="uid://bhl8fy0l6levh" path="res://Player/player.tscn" id="1_jc3st"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://4x4j1fhhhikm" path="res://River/Lily.png" id="5_j0r74"]
 [ext_resource type="Script" path="res://River/lily.gd" id="6_kwcog"]
 [ext_resource type="PackedScene" uid="uid://bes8e7lnvdei5" path="res://Common/audio_player.tscn" id="9_dfmyq"]
+[ext_resource type="PackedScene" uid="uid://bbst3n3gkcp3c" path="res://Rack/rack.tscn" id="12_mp8o1"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_mk6ue"]
 noise_type = 2
@@ -128,6 +129,10 @@ position = Vector2(1152, 486)
 shape = SubResource("WorldBoundaryShape2D_2ullu")
 
 [node name="AudioPlayer" parent="." instance=ExtResource("9_dfmyq")]
+
+[node name="Rack" parent="." instance=ExtResource("12_mp8o1")]
+z_index = 4
+position = Vector2(105, 562)
 
 [connection signal="max_tension" from="Player" to="." method="_on_player_max_tension"]
 [connection signal="reeling" from="Player" to="." method="_on_player_reeling"]

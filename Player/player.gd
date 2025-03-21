@@ -18,6 +18,7 @@ const MAX_TENSION = 300
 const MIN_TENSION = 0
 
 var tension = 0
+var tension_increase = 100
 var raise_tension = false
 var shake = 1
 
@@ -45,7 +46,7 @@ func _physics_process(delta: float) -> void:
 		audio_player.stop_sound("WalkingSFX")
 	
 	if raise_tension:
-		tension += 100 * delta
+		tension += tension_increase * delta
 	else:
 		tension = max(tension - 150 * delta, MIN_TENSION)
 	
@@ -81,7 +82,14 @@ func _on_idle_throw_hook() -> void:
 func _on_waiting_retract_hook() -> void:
 	retract_hook.emit()
 
-func begin_reeling():
+func begin_reeling(Fish: Global.Fish):
+	match Fish:
+		Global.Fish.BrookTrout || Global.Fish.BrownTrout:
+			pass
+		Global.Fish.Carp || Global.Fish.Dab:
+			tension_increase = 120
+		Global.Fish.Muskellunge:
+			tension_increase = 130
 	player_state_machine.on_child_transition("Reeling")
 
 func _on_reeling_reeling() -> void:

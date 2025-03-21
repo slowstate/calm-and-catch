@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://bbst3n3gkcp3c"]
+
+[ext_resource type="Texture2D" uid="uid://5qosn582m4l2" path="res://Rack/Rack.png" id="1_84ya0"]
+[ext_resource type="Script" path="res://Rack/rack.gd" id="1_arx5w"]
+[ext_resource type="Texture2D" uid="uid://d1ggdx87kh3o4" path="res://Fish/Brook_Trout.png" id="3_rii43"]
+[ext_resource type="Texture2D" uid="uid://bghbyay38pqy3" path="res://Fish/Brown_Trout.png" id="4_vw7rd"]
+[ext_resource type="Texture2D" uid="uid://b8asb7giltl1f" path="res://Fish/Carp.png" id="5_ia1n0"]
+[ext_resource type="Texture2D" uid="uid://bvkbj2xutjp7k" path="res://Fish/Dab.png" id="6_3wsc8"]
+[ext_resource type="Texture2D" uid="uid://c1kj8qupujqvp" path="res://Fish/Muskellunge.png" id="7_jqis2"]
+
+[node name="Rack" type="Node2D"]
+script = ExtResource("1_arx5w")
+
+[node name="RackSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_84ya0")
+
+[node name="BrookTroutSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-37, -17)
+rotation = 1.5708
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("3_rii43")
+
+[node name="BrownTroutSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-15.5, -17)
+rotation = 1.5708
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("4_vw7rd")
+
+[node name="CarpSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(3, -21)
+rotation = 4.71239
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("5_ia1n0")
+
+[node name="DabSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(24.5, -21.5)
+rotation = 4.71239
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("6_3wsc8")
+
+[node name="MuskellungeSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(47, -13)
+rotation = 1.5708
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("7_jqis2")

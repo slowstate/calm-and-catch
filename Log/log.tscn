@@ -1,11 +1,8 @@
-[gd_scene load_steps=23 format=3 uid="uid://byy4rowhpjrdf"]
+[gd_scene load_steps=10 format=3 uid="uid://byy4rowhpjrdf"]
 
 [ext_resource type="Texture2D" uid="uid://ckqr0sxc6lsv4" path="res://Log/log.png" id="1_1hqg2"]
 [ext_resource type="Script" path="res://Log/log.gd" id="1_7u568"]
-[ext_resource type="Script" path="res://Log/trail.gd" id="3_ipty1"]
-[ext_resource type="PackedScene" uid="uid://dxfrjus2l0wwg" path="res://Log/log_animation.tscn" id="4_buwr2"]
 [ext_resource type="Shader" path="res://Log/log.gdshader" id="5_eq204"]
-[ext_resource type="Texture2D" uid="uid://da68kncjfba7f" path="res://icon.svg" id="6_kkxsw"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_6ixfw"]
 noise_type = 2
@@ -33,48 +30,6 @@ shader_parameter/noise2 = SubResource("NoiseTexture2D_f802j")
 radius = 14.5
 height = 132.0
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ju403"]
-noise_type = 2
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_h05bw"]
-noise = SubResource("FastNoiseLite_ju403")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_8wtve"]
-noise_type = 2
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_k328p"]
-noise = SubResource("FastNoiseLite_8wtve")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qk7ak"]
-shader = ExtResource("5_eq204")
-shader_parameter/scroll1 = Vector2(-0.04, 0.02)
-shader_parameter/scroll2 = Vector2(-0.05, -0.02)
-shader_parameter/distortion_strength = 0.2
-shader_parameter/noise1 = SubResource("NoiseTexture2D_h05bw")
-shader_parameter/noise2 = SubResource("NoiseTexture2D_k328p")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_eo2qs"]
-noise_type = 2
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1jg4j"]
-seamless = true
-noise = SubResource("FastNoiseLite_eo2qs")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_6sfcg"]
-noise_type = 2
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lvjai"]
-seamless = true
-noise = SubResource("FastNoiseLite_6sfcg")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_b4cu2"]
-shader = ExtResource("5_eq204")
-shader_parameter/scroll1 = Vector2(-0.04, 0.02)
-shader_parameter/scroll2 = Vector2(-0.05, -0.02)
-shader_parameter/distortion_strength = 0.2
-shader_parameter/noise1 = SubResource("NoiseTexture2D_1jg4j")
-shader_parameter/noise2 = SubResource("NoiseTexture2D_lvjai")
-
 [node name="Log" type="Area2D"]
 z_index = 4
 collision_layer = 4
@@ -87,23 +42,6 @@ scale = Vector2(0.6, 0.6)
 texture = ExtResource("1_1hqg2")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, -5)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_hfah3")
-
-[node name="Trail" type="Line2D" parent="."]
-script = ExtResource("3_ipty1")
-
-[node name="LogAnimation" parent="." instance=ExtResource("4_buwr2")]
-visible = false
-material = SubResource("ShaderMaterial_qk7ak")
-
-[node name="ShaderMask" type="Sprite2D" parent="."]
-visible = false
-material = SubResource("ShaderMaterial_b4cu2")
-position = Vector2(-1, 64)
-texture = ExtResource("6_kkxsw")
-
-[node name="LogAnimation2" parent="." instance=ExtResource("4_buwr2")]
-visible = false

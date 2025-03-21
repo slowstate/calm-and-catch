@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dvkv21wkwo18p"]
+[gd_scene load_steps=23 format=3 uid="uid://dvkv21wkwo18p"]
 
 [ext_resource type="Script" path="res://River/river.gd" id="1_f45dc"]
 [ext_resource type="PackedScene" uid="uid://bhl8fy0l6levh" path="res://Player/player.tscn" id="1_jc3st"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://River/lily.gd" id="6_kwcog"]
 [ext_resource type="PackedScene" uid="uid://bes8e7lnvdei5" path="res://Common/audio_player.tscn" id="9_dfmyq"]
 [ext_resource type="PackedScene" uid="uid://bbst3n3gkcp3c" path="res://Rack/rack.tscn" id="12_mp8o1"]
+[ext_resource type="Script" path="res://River/boat_spawn_zone.gd" id="11_fy606"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_mk6ue"]
 noise_type = 2
@@ -45,7 +46,10 @@ shader_parameter/noise2 = SubResource("NoiseTexture2D_oivn2")
 size = Vector2(1100, 300)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d3h43"]
-size = Vector2(1, 350)
+size = Vector2(4, 259)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ewbfp"]
+size = Vector2(5, 40)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_385mj"]
 normal = Vector2(1, 0)
@@ -104,11 +108,22 @@ position = Vector2(-60, 200)
 script = ExtResource("5_efqls")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ObstacleSpawnZone"]
+position = Vector2(1, -45.5)
 shape = SubResource("RectangleShape2D_d3h43")
 
 [node name="ObstacleSpawnTimer" type="Timer" parent="ObstacleSpawnZone"]
 wait_time = 3.0
 one_shot = true
+
+[node name="BoatSpawnZone" type="Area2D" parent="."]
+position = Vector2(1388, 321)
+script = ExtResource("11_fy606")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoatSpawnZone"]
+shape = SubResource("RectangleShape2D_ewbfp")
+
+[node name="BoatSpawnTimer" type="Timer" parent="BoatSpawnZone"]
+wait_time = 3.0
 
 [node name="WorldBoundaries" type="Node" parent="."]
 
@@ -144,3 +159,4 @@ position = Vector2(105, 562)
 [connection signal="fish_obstacle_hit" from="FishSpawnZone" to="." method="_on_fish_spawn_zone_fish_obstacle_hit"]
 [connection signal="timeout" from="FishSpawnZone/FishSpawnTimer" to="FishSpawnZone" method="_on_fish_spawn_timer_timeout"]
 [connection signal="timeout" from="ObstacleSpawnZone/ObstacleSpawnTimer" to="ObstacleSpawnZone" method="_on_obstacle_spawn_timer_timeout"]
+[connection signal="timeout" from="BoatSpawnZone/BoatSpawnTimer" to="BoatSpawnZone" method="_on_obstacle_spawn_timer_timeout"]

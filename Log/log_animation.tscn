@@ -1,6 +1,28 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3hw57ihyb86y"]
+[gd_scene load_steps=12 format=3 uid="uid://dxfrjus2l0wwg"]
 
+[ext_resource type="Script" path="res://Log/log_animation.gd" id="1_v4yuf"]
 [ext_resource type="Texture2D" uid="uid://ckqr0sxc6lsv4" path="res://Log/log.png" id="1_xwa50"]
+[ext_resource type="Shader" path="res://Log/log.gdshader" id="2_aj7rq"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6qpu6"]
+noise_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_04bcg"]
+noise = SubResource("FastNoiseLite_6qpu6")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_aof4t"]
+noise_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_t34cj"]
+noise = SubResource("FastNoiseLite_aof4t")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fyhn6"]
+shader = ExtResource("2_aj7rq")
+shader_parameter/scroll1 = Vector2(-0.04, 0.02)
+shader_parameter/scroll2 = Vector2(-0.05, -0.02)
+shader_parameter/distortion_strength = 0.2
+shader_parameter/noise1 = SubResource("NoiseTexture2D_04bcg")
+shader_parameter/noise2 = SubResource("NoiseTexture2D_t34cj")
 
 [sub_resource type="Animation" id="Animation_jaysq"]
 resource_name = "Log_Move"
@@ -65,9 +87,12 @@ _data = {
 }
 
 [node name="LogAnimation" type="Node2D"]
+script = ExtResource("1_v4yuf")
 
 [node name="Log" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_fyhn6")
 rotation = 0.0785398
+scale = Vector2(0.6, 0.6)
 texture = ExtResource("1_xwa50")
 offset = Vector2(1.28062, 2.39093)
 

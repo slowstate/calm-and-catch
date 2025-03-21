@@ -2,8 +2,9 @@ extends CharacterBody2D
 
 @onready var throw_charge_timer: Timer = $ThrowChargeTimer
 @onready var player_state_machine: PlayerStateMachine = $PlayerStateMachine
-@onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var audio_player: Node2D = $AudioPlayer
+@onready var character_animation: Node2D = $"Character Animation"
+@onready var rod_animation: Node2D = $RodAnimation
 
 signal throw_hook(throw_distance)
 signal retract_hook
@@ -35,7 +36,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = 0
 		character_animation.play_animation("Idle")
-		#walking_sfx.stop()
 	
 	#Walking sound effects
 	if velocity.x != 0:
@@ -44,22 +44,25 @@ func _physics_process(delta: float) -> void:
 	elif audio_player.is_playing("WalkingSFX"):
 		audio_player.stop_sound("WalkingSFX")
 	
-
 	if raise_tension:
 		tension += 100 * delta
 	else:
 		tension = max(tension - 150 * delta, MIN_TENSION)
+	
+	rod_animation.set_color(Vector3(tension/MAX_TENSION, min(tension/MAX_TENSION, 0.3), 0))
+	
 	if tension >= MAX_TENSION:
 		max_tension.emit()
 		stop_reeling()
 		
 	if tension > MAX_TENSION * 0.7:
 		shake *= -1
-		sprite_2d.position.x += 5 * shake
+		character_animation.position.x += 5 * shake
 		
 	move_and_slide()
 
 func _on_idle_charge_hook() -> void:
+	rod_animation.play_animation("Cast_2")
 	throw_charge_timer.wait_time = 3
 	throw_charge_timer.start()
 
@@ -67,8 +70,10 @@ func _on_idle_throw_hook() -> void:
 	var charge_percentage: float = (3 - throw_charge_timer.time_left)/3
 	throw_charge_timer.stop()
 	var throw_distance = MAX_HOOK_THROW_DISTANCE * charge_percentage
+	rod_animation.play_animation("Throw")
+	rod_animation.seek(charge_percentage)
 	throw_hook.emit(throw_distance)
-	if throw_distance <= 1.5:
+	if charge_percentage <= 0.5:
 		audio_player.play_sound("RodThrowShort")
 	else:
 		audio_player.play_sound("RodThrowLong")
@@ -97,3 +102,6 @@ func stop_reeling():
 	player_state_machine.on_child_transition("Idle")
 	if audio_player.is_playing("ReelingSFX"):
 		audio_player.stop_sound("ReelingSFX")
+
+func get_rod_tip_global_position() -> Vector2:
+	return rod_animation.get_rod_tip_global_position()

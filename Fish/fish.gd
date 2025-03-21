@@ -3,6 +3,7 @@ extends Area2D
 @onready var hooked_timer: Timer = $HookedTimer
 @onready var hook_box: Area2D = $HookBox
 @onready var hit_box: Area2D = $HitBox
+@onready var sprite_animation: AnimatedSprite2D = $SpriteAnimation
 
 signal caught(fish)
 signal hooked(fish)
@@ -24,6 +25,7 @@ func _on_hooked_timer_timeout() -> void:
 	hooked.emit(self)
 	hook_box.monitoring = false
 	hit_box.monitoring = true
+	sprite_animation.play("fish hooked")
 
 func _on_body_entered(body: Node2D) -> void:
 	caught.emit(self)

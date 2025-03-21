@@ -1,9 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5i5dph63mto0"]
+[gd_scene load_steps=11 format=3 uid="uid://c5i5dph63mto0"]
 
+[ext_resource type="Script" path="res://Player/Rod/rod.gd" id="1_nbchk"]
 [ext_resource type="Texture2D" uid="uid://cywa6w0ruliow" path="res://Player/Rod/Rod.png" id="1_w1ul8"]
+[ext_resource type="Shader" path="res://Player/Rod/rod.gdshader" id="2_8em5r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oe10l"]
+shader = ExtResource("2_8em5r")
+shader_parameter/replacement_color = null
+
+[sub_resource type="ImageTexture" id="ImageTexture_4bfhs"]
 
 [sub_resource type="Animation" id="Animation_h1ecc"]
 resource_name = "Cast"
+length = 3.0
+loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -11,7 +21,7 @@ tracks/0/path = NodePath("Rod:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.933333),
+"times": PackedFloat32Array(0, 3.23333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(0, 1), Vector2(0, 1)]
@@ -23,10 +33,38 @@ tracks/1/path = NodePath("Rod:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.7, 0.933333),
+"times": PackedFloat32Array(0, 3, 3.23333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.0, -1.0914, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_kunyy"]
+resource_name = "Cast_2"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rod:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Rod:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -1.0914]
 }
 
 [sub_resource type="Animation" id="Animation_o46yu"]
@@ -56,18 +94,55 @@ tracks/1/keys = {
 "values": [0.0]
 }
 
+[sub_resource type="Animation" id="Animation_bcnfd"]
+resource_name = "Throw"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rod:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.233333),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Rod:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-1.0914, 0.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0egdq"]
 _data = {
 "Cast": SubResource("Animation_h1ecc"),
-"RESET": SubResource("Animation_o46yu")
+"Cast_2": SubResource("Animation_kunyy"),
+"RESET": SubResource("Animation_o46yu"),
+"Throw": SubResource("Animation_bcnfd")
 }
 
 [node name="RodAnimation" type="Node2D"]
+position = Vector2(229, 302)
+script = ExtResource("1_nbchk")
 
 [node name="Rod" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_oe10l")
 position = Vector2(0, 1)
 texture = ExtResource("1_w1ul8")
 offset = Vector2(20, -110)
+
+[node name="RodTip" type="Sprite2D" parent="Rod"]
+position = Vector2(43.1485, -242.205)
+texture = SubResource("ImageTexture_4bfhs")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

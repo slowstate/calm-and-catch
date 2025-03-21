@@ -1,12 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://bhl8fy0l6levh"]
+[gd_scene load_steps=10 format=3 uid="uid://bhl8fy0l6levh"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_g3ng8"]
-[ext_resource type="Texture2D" uid="uid://bq02nrer4ljja" path="res://Player/player.png" id="1_gejye"]
 [ext_resource type="Script" path="res://Player/state_machine.gd" id="3_3udcm"]
 [ext_resource type="Script" path="res://Player/idle.gd" id="4_rrs2i"]
 [ext_resource type="Script" path="res://Player/waiting.gd" id="5_s8tw2"]
 [ext_resource type="Script" path="res://Player/reeling.gd" id="6_q6q68"]
 [ext_resource type="PackedScene" uid="uid://bes8e7lnvdei5" path="res://Common/audio_player.tscn" id="7_4omj6"]
+[ext_resource type="PackedScene" uid="uid://cnadeovyygmfd" path="res://Player/Character/character_animation.tscn" id="8_lbksn"]
+[ext_resource type="PackedScene" uid="uid://c5i5dph63mto0" path="res://Player/Rod/Rod.tscn" id="8_qqw2x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jbqkx"]
 size = Vector2(34, 107)
@@ -16,11 +17,9 @@ z_index = 6
 collision_mask = 8
 script = ExtResource("1_g3ng8")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(-14, -12.3842)
-scale = Vector2(0.35468, 0.35468)
-texture = ExtResource("1_gejye")
+[node name="Character Animation" parent="." instance=ExtResource("8_lbksn")]
+z_index = 1
+scale = Vector2(0.06, 0.06)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.115768)
@@ -45,8 +44,9 @@ script = ExtResource("6_q6q68")
 
 [node name="AudioPlayer" parent="." instance=ExtResource("7_4omj6")]
 
-[node name="Character Animation" parent="." instance=ExtResource("11_bge7e")]
-scale = Vector2(0.06, 0.06)
+[node name="RodAnimation" parent="." instance=ExtResource("8_qqw2x")]
+position = Vector2(12, -3)
+scale = Vector2(0.4, 0.4)
 
 [connection signal="charge_hook" from="PlayerStateMachine/Idle" to="." method="_on_idle_charge_hook"]
 [connection signal="throw_hook" from="PlayerStateMachine/Idle" to="." method="_on_idle_throw_hook"]

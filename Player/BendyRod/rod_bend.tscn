@@ -172,9 +172,8 @@ script = ExtResource("1_hjv5a")
 [node name="Body" type="Node2D" parent="."]
 
 [node name="1" type="Sprite2D" parent="Body"]
-position = Vector2(9.00321, -230.935)
-rotation = 0.0280194
-scale = Vector2(0.999802, 0.999802)
+position = Vector2(9.59292, -101)
+rotation = 0.0327932
 texture = ExtResource("1_arp5w")
 offset = Vector2(0, -4)
 
@@ -182,33 +181,32 @@ offset = Vector2(0, -4)
 position = Vector2(0.145524, -7.97887)
 
 [node name="2" type="Sprite2D" parent="Body"]
-position = Vector2(9.00341, -219.936)
-scale = Vector2(0.999878, 0.999878)
+position = Vector2(9.61238, -89.9988)
+rotation = -0.00176974
 texture = ExtResource("2_0flp6")
 offset = Vector2(0, -6)
 
 [node name="3" type="Sprite2D" parent="Body"]
-position = Vector2(9.00374, -202.938)
-rotation = -6.4027e-05
-scale = Vector2(0.999942, 0.999942)
+position = Vector2(9.64248, -72.9997)
+rotation = -0.00176992
 texture = ExtResource("3_y1fn6")
 offset = Vector2(0, -9)
 
 [node name="4" type="Sprite2D" parent="Body"]
-position = Vector2(9.00411, -182.938)
-scale = Vector2(0.999961, 0.999961)
+position = Vector2(9.67787, -52.9997)
+rotation = -0.00177057
 texture = ExtResource("4_6edgg")
 offset = Vector2(0, -10)
 
 [node name="5" type="Sprite2D" parent="Body"]
-position = Vector2(9.00461, -154.955)
-scale = Vector2(0.999996, 0.999996)
+position = Vector2(9.72744, -24.9998)
+rotation = -0.00176931
 texture = ExtResource("5_ixj8x")
 offset = Vector2(0, -13)
 
 [node name="6" type="Sprite2D" parent="Body"]
-position = Vector2(9.00749, -17.9411)
-scale = Vector2(1, 1)
+position = Vector2(9.96992, 112)
+rotation = -0.00176984
 texture = ExtResource("6_578w8")
 offset = Vector2(0, -69)
 

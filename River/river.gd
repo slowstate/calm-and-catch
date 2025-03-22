@@ -38,9 +38,7 @@ func _process(delta: float) -> void:
 		if reeling:
 			normalised_vector = (player.position-hooked_fish.position).normalized()
 			hooked_fish.position += normalised_vector * REELING_SPEED * delta
-			# TODO: Rotate fish based on player angle + draw hook line to fish head
-			#hooked_fish.rotation = normalised_vector.angle() - deg_to_rad(90) + deg_to_rad(14)
-			hooked_fish.rotation = deg_to_rad(14)
+			hooked_fish.rotation = normalised_vector.angle() - deg_to_rad(90) + deg_to_rad(14)
 			draw_hook_line(true, hooked_fish.get_fish_head_global_position())
 		else:
 			hooked_fish.position.y -= hooked_fish.speed * delta
@@ -57,7 +55,10 @@ func _process(delta: float) -> void:
 func draw_hook_line(visible: bool, to_position: Vector2 = hook.position, from_position: Vector2 = player.get_rod_tip_global_position()):
 	hook_line.set_point_position(0, from_position)
 	hook_line.set_point_position(1, to_position)
-	hook_line.default_color = Color.WHITE - Color(player.tension/player.MAX_TENSION*0.3, player.tension/player.MAX_TENSION, player.tension/player.MAX_TENSION*3, 0)
+	hook_line.default_color = Color.WHITE - Color(
+		lerp(0.0, 0.3, pow(player.tension/player.MAX_TENSION, 5)),
+		lerp(0, 1, pow(player.tension/player.MAX_TENSION, 5)),
+		lerp(0, 1, pow(player.tension/player.MAX_TENSION, 2)), 0)
 	hook_line.visible = visible
 	
 	

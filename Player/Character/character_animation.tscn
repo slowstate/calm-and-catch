@@ -566,6 +566,7 @@ texture = ExtResource("12_1hkoa")
 [node name="Torso" type="Sprite2D" parent="Character Container/Body"]
 position = Vector2(-73, -27)
 rotation = 0.00337516
+scale = Vector2(1, 1)
 texture = ExtResource("13_odlsg")
 offset = Vector2(2, 1)
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b06lg3vfd3qoq"]
+[gd_scene load_steps=16 format=3 uid="uid://b06lg3vfd3qoq"]
 
 [ext_resource type="Texture2D" uid="uid://x8h8byf12v8p" path="res://Player/BendyRod/1.png" id="1_arp5w"]
 [ext_resource type="Script" path="res://Player/BendyRod/rod_bend.gd" id="1_hjv5a"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://h1yf3dd76ss5" path="res://Player/BendyRod/4.png" id="4_6edgg"]
 [ext_resource type="Texture2D" uid="uid://y8s0arpuqyyt" path="res://Player/BendyRod/5.png" id="5_ixj8x"]
 [ext_resource type="Texture2D" uid="uid://b05p0p17pgok8" path="res://Player/BendyRod/6.png" id="6_578w8"]
+[ext_resource type="Texture2D" uid="uid://3ggt58royvvd" path="res://Player/BendyRod/Handle.png" id="8_h4iks"]
 
 [sub_resource type="SkeletonModification2DCCDIK" id="SkeletonModification2DCCDIK_prfrc"]
 target_nodepath = NodePath("../../Node2D/Target")
@@ -74,6 +75,97 @@ modification_count = 2
 modifications/0 = SubResource("SkeletonModification2DCCDIK_prfrc")
 modifications/1 = SubResource("SkeletonModification2DLookAt_q4yvi")
 
+[sub_resource type="Animation" id="Animation_33lyn"]
+resource_name = "Wind"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bones:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -0.349066]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D/Target:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(9, -401), Vector2(-241, -337)]
+}
+
+[sub_resource type="Animation" id="Animation_6b7al"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bones:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.523599]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D/Target:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-426, -79)]
+}
+
+[sub_resource type="Animation" id="Animation_65a6o"]
+resource_name = "Cast"
+length = 0.25
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bones:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.349066, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D/Target:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-241, -337), Vector2(9, -401)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_no4hr"]
+_data = {
+"Cast": SubResource("Animation_65a6o"),
+"RESET": SubResource("Animation_6b7al"),
+"Wind": SubResource("Animation_33lyn")
+}
+
 [node name="Rod" type="Node2D"]
 script = ExtResource("1_hjv5a")
 
@@ -118,11 +210,15 @@ rotation = -0.00176984
 texture = ExtResource("6_578w8")
 offset = Vector2(0, -69)
 
+[node name="Handle" type="Sprite2D" parent="Body/6"]
+position = Vector2(4.99999, 24.0001)
+texture = ExtResource("8_h4iks")
+
 [node name="Bones" type="Node2D" parent="."]
+rotation = -0.523599
 
 [node name="Skeleton2D" type="Skeleton2D" parent="Bones"]
-visible = false
-position = Vector2(8, -18)
+position = Vector2(7, -148)
 modification_stack = SubResource("SkeletonModificationStack2D_ktwg8")
 
 [node name="6" type="Bone2D" parent="Bones/Skeleton2D"]
@@ -188,7 +284,12 @@ remote_path = NodePath("../../../../Body/6")
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="Target" type="Node2D" parent="Node2D"]
-position = Vector2(9, -436)
+position = Vector2(-426, -79)
 
 [node name="Lookat" type="Node2D" parent="Node2D/Target"]
-position = Vector2(-4, 53)
+position = Vector2(-4, -20)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_no4hr")
+}

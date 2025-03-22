@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhuca3asjxiri"
-path="res://.godot/imported/boat.png-ff916f3d4a38ead9883ae403637a9282.ctex"
+uid="uid://d1ggdx87kh3o4"
+path="res://.godot/imported/Brook_Trout.png-b2789562e4fe01f2bcd94b282a6df64e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Boat/boat.png"
-dest_files=["res://.godot/imported/boat.png-ff916f3d4a38ead9883ae403637a9282.ctex"]
+source_file="res://Fish/Brook_Trout.png"
+dest_files=["res://.godot/imported/Brook_Trout.png-b2789562e4fe01f2bcd94b282a6df64e.ctex"]
 
 [params]
 

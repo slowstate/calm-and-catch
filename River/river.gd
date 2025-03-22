@@ -5,6 +5,7 @@ extends Node2D
 @onready var hook_line: Line2D = $HookLine
 @onready var fish_spawn_zone: Area2D = $FishSpawnZone
 @onready var audio_player: Node2D = $AudioPlayer
+@onready var rack: Node2D = $Rack
 
 const REELING_SPEED = 100
 const HOOK_THROW_SPEED = 10
@@ -21,24 +22,28 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if hook.visible:
+		player.set_rod_bend_target(hook.position)
 		draw_hook_line(true, hook.position + Vector2(0, -5))
 		if hook.position.y > player.position.y - hook_throw_distance+3:
 			hook.position.y = lerp(hook.position.y, player.position.y - hook_throw_distance, delta * HOOK_THROW_SPEED)
 		else:
 			hook.enable_collision(true)
+			hook.set_bobbing(true)
 	else:
+		hook.set_bobbing(false)
 		draw_hook_line(false)
 	
 	if hooked_fish != null:
+		player.set_rod_bend_target(hooked_fish.position)
 		if reeling:
 			normalised_vector = (player.position-hooked_fish.position).normalized()
 			hooked_fish.position += normalised_vector * REELING_SPEED * delta
 			hooked_fish.rotation = normalised_vector.angle() - deg_to_rad(90) + deg_to_rad(14)
 			draw_hook_line(true, hooked_fish.get_fish_head_global_position())
 		else:
-			hooked_fish.position.y -= 50 * delta
+			hooked_fish.position.y -= hooked_fish.speed * delta
 			hooked_fish.rotation = deg_to_rad(180 + 14)
-			draw_hook_line(true, hooked_fish.position)
+			draw_hook_line(true, hooked_fish.get_fish_head_global_position())
 		if hooked_fish.position.y < get_viewport_rect().position.y - 50:
 			reset_hook()
 			stop_reeling_and_reset_fish()
@@ -47,14 +52,17 @@ func _process(delta: float) -> void:
 	if !audio_player.is_playing("River1") && !audio_player.is_playing("River2"):
 		audio_player.play_random_sound(["River1", "River2"], -20, -10)
 
-func draw_hook_line(visible: bool, to_position: Vector2 = player.position, from_position: Vector2 = player.get_rod_tip_global_position()):
+func draw_hook_line(visible: bool, to_position: Vector2 = hook.position, from_position: Vector2 = player.get_rod_tip_global_position()):
 	hook_line.set_point_position(0, from_position)
 	hook_line.set_point_position(1, to_position)
+	
+	# Colour of hook line starts with white and gradually turns yellow > red by subtracting the below rgb values
 	hook_line.default_color = Color.WHITE - Color(
 		lerp(0.0, 0.3, pow(player.tension/player.MAX_TENSION, 5)),
 		lerp(0, 1, pow(player.tension/player.MAX_TENSION, 5)),
 		lerp(0, 1, pow(player.tension/player.MAX_TENSION, 2)), 0)
 	hook_line.visible = visible
+	
 	
 func _on_player_throw_hook(throw_distance: Variant) -> void:
 	hook.position = player.position
@@ -69,7 +77,7 @@ func _on_player_retract_hook() -> void:
 
 func _on_fish_spawn_zone_fish_hooked(fish: Variant) -> void:
 	reset_hook()
-	player.begin_reeling()
+	player.begin_reeling(fish.fish_type)
 	hooked_fish = fish
 	hook.visible = false
 	audio_player.play_random_sound(["FishHooked1", "FishHooked2"])
@@ -81,6 +89,7 @@ func _on_player_relaxing() -> void:
 	reeling = false
 
 func _on_fish_spawn_zone_fish_caught(fish: Variant) -> void:
+	rack.fish_caught(fish.fish_type)
 	stop_reeling_and_reset_fish()
 	audio_player.play_random_sound(["FishCaught1", "FishCaught2"])
 

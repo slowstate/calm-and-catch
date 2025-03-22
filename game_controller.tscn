@@ -1,99 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://c6y6igu11f5wy"]
+[gd_scene load_steps=3 format=3 uid="uid://c6y6igu11f5wy"]
 
 [ext_resource type="PackedScene" uid="uid://dvkv21wkwo18p" path="res://River/river.tscn" id="1_it37d"]
-[ext_resource type="Script" path="res://control_ui.gd" id="2_c66eg"]
-[ext_resource type="Texture2D" uid="uid://d2ygj1n5qiwtn" path="res://Common/Controls/a_key.png" id="3_x04vu"]
-[ext_resource type="Texture2D" uid="uid://cs5ue3pg3tipd" path="res://Common/Controls/d_key.png" id="4_a14qq"]
-[ext_resource type="Texture2D" uid="uid://s6fhbhveod3g" path="res://Common/Controls/space_key.png" id="5_6i8q6"]
-[ext_resource type="Texture2D" uid="uid://bihdugflbejwq" path="res://Common/Controls/left_click_ui.png" id="6_mpuyo"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_va4us"]
-outline_size = 2
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_f1d55"]
-outline_size = 2
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_7jjfy"]
-outline_size = 2
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_7jvmg"]
-outline_size = 2
-outline_color = Color(0, 0, 0, 1)
+[ext_resource type="PackedScene" uid="uid://depjq28sokgwc" path="res://Common/Controls/control_ui.tscn" id="2_sdjg7"]
 
 [node name="GameController" type="Node2D"]
 
 [node name="River" parent="." instance=ExtResource("1_it37d")]
 
-[node name="ControlUI" type="Control" parent="."]
-z_index = 15
-layout_mode = 3
-anchors_preset = 0
-offset_left = 332.0
-offset_top = 155.0
-offset_right = 789.0
-offset_bottom = 435.0
-script = ExtResource("2_c66eg")
-
-[node name="MoveLeftLabel" type="Label" parent="ControlUI"]
-offset_top = 109.0
-offset_right = 77.0
-offset_bottom = 132.0
-text = "Move Left"
-label_settings = SubResource("LabelSettings_va4us")
-
-[node name="A_KeySprite" type="Sprite2D" parent="ControlUI/MoveLeftLabel"]
-position = Vector2(43, -29)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("3_x04vu")
-
-[node name="MoveRightLabel" type="Label" parent="ControlUI"]
-layout_mode = 0
-offset_left = 93.0
-offset_top = 109.0
-offset_right = 180.0
-offset_bottom = 132.0
-text = "Move Right"
-label_settings = SubResource("LabelSettings_f1d55")
-
-[node name="D_KeySprite" type="Sprite2D" parent="ControlUI/MoveRightLabel"]
-position = Vector2(43, -29)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("4_a14qq")
-
-[node name="ThrowRetractReelLabel" type="Label" parent="ControlUI"]
-layout_mode = 0
-offset_left = 244.0
-offset_top = 109.0
-offset_right = 395.0
-offset_bottom = 132.0
-text = "Throw/Retract/Reel"
-label_settings = SubResource("LabelSettings_7jjfy")
-
-[node name="SpaceSprite" type="Sprite2D" parent="ControlUI/ThrowRetractReelLabel"]
-position = Vector2(33.8, -29)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("5_6i8q6")
-
-[node name="OrLabel" type="Label" parent="ControlUI/ThrowRetractReelLabel"]
-layout_mode = 0
-offset_left = 115.8
-offset_top = -40.0
-offset_right = 155.8
-offset_bottom = -17.0
-text = "Or"
-label_settings = SubResource("LabelSettings_7jvmg")
-
-[node name="LeftClickSprite" type="Sprite2D" parent="ControlUI/ThrowRetractReelLabel"]
-position = Vector2(165.8, -28)
-scale = Vector2(3, 3)
-texture = ExtResource("6_mpuyo")
-
-[node name="ControlsTimer" type="Timer" parent="ControlUI"]
-wait_time = 5.0
-one_shot = true
-autostart = true
-
-[connection signal="timeout" from="ControlUI/ControlsTimer" to="ControlUI" method="_on_controls_timer_timeout"]
+[node name="ControlUI" parent="." instance=ExtResource("2_sdjg7")]

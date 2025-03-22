@@ -11,8 +11,6 @@ func play_animation(animation_name: String, animation_speed: float = 1):
 
 func seek(percentage: float):
 	var length = animation_player.get_animation(animation_player.current_animation).length
-	print("length: " + str(length))
-	print("percentage: " + str(percentage))
 	animation_player.seek(length * (1-percentage), true)
 	
 func set_color(color_vector: Vector3):

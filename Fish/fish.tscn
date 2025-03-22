@@ -228,18 +228,20 @@ height = 38.0
 height = 46.0
 
 [node name="Fish" type="Area2D"]
-z_index = 1
+z_index = 2
 collision_layer = 0
 collision_mask = 7
 script = ExtResource("1_pktc1")
 
 [node name="SpriteAnimation" type="AnimatedSprite2D" parent="."]
-z_index = 2
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_thuap")
 animation = &"fish hooked"
 autoplay = "default"
-frame_progress = 0.610746
+frame_progress = 0.911972
+
+[node name="FishHead" type="Sprite2D" parent="SpriteAnimation"]
+position = Vector2(16.6667, 60)
 
 [node name="HookBox" type="Area2D" parent="."]
 collision_layer = 0

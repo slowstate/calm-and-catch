@@ -1,26 +1,95 @@
-[gd_scene load_steps=4 format=3 uid="uid://cr8qmil0rhuxb"]
+[gd_scene load_steps=10 format=3 uid="uid://cr8qmil0rhuxb"]
 
 [ext_resource type="Script" path="res://Boat/boat.gd" id="1_pcnpa"]
-[ext_resource type="Texture2D" uid="uid://cmvdx4q7rqedr" path="res://Boat/boat.png" id="1_s1oun"]
+[ext_resource type="Texture2D" uid="uid://bhuca3asjxiri" path="res://Boat/boat.png" id="3_pcnjt"]
+[ext_resource type="Script" path="res://trail.gd" id="4_plq2m"]
+[ext_resource type="Texture2D" uid="uid://bddy0te3jijat" path="res://River/BG.png" id="5_b6v87"]
+[ext_resource type="Texture2D" uid="uid://bqt43vmy53j3u" path="res://Boat/Oar.png" id="5_mrr2s"]
+
+[sub_resource type="Animation" id="Animation_6hcqj"]
+resource_name = "Boat_Move"
+length = 2.75
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OarWaterMask/Oar:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 1.86667, 2, 2.36667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.0761271, -1.06578, -1.14191, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_bvhsy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OarWaterMask/Oar:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v22mc"]
+_data = {
+"Boat_Move": SubResource("Animation_6hcqj"),
+"RESET": SubResource("Animation_bvhsy")
+}
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ktaei"]
-radius = 32.0
+radius = 36.25
 height = 294.0
 
 [node name="Boat" type="Area2D"]
-z_index = 3
-position = Vector2(0, -70)
+z_index = 5
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_pcnpa")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = 3
-texture = ExtResource("1_s1oun")
+visible = false
+position = Vector2(0, -28)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_pcnjt")
+
+[node name="Boat" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_pcnjt")
+offset = Vector2(-4, -34)
+
+[node name="Trail" type="Line2D" parent="Boat"]
+visible = false
+position = Vector2(5.5, 21)
+script = ExtResource("4_plq2m")
+
+[node name="OarWaterMask" type="Sprite2D" parent="."]
+clip_children = 1
+position = Vector2(72, -499)
+texture = ExtResource("5_b6v87")
+
+[node name="Oar" type="Sprite2D" parent="OarWaterMask"]
+position = Vector2(-8, 458)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("5_mrr2s")
+offset = Vector2(-31.8667, 51.0686)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_v22mc")
+}
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-position = Vector2(1, 34)
 rotation = 1.5708
+scale = Vector2(0.8, 0.8)
 shape = SubResource("CapsuleShape2D_ktaei")
 
 [node name="MoveTimer" type="Timer" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bhl8fy0l6levh"]
+[gd_scene load_steps=11 format=3 uid="uid://bhl8fy0l6levh"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_g3ng8"]
 [ext_resource type="Script" path="res://Player/state_machine.gd" id="3_3udcm"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bes8e7lnvdei5" path="res://Common/audio_player.tscn" id="7_4omj6"]
 [ext_resource type="PackedScene" uid="uid://cnadeovyygmfd" path="res://Player/Character/character_animation.tscn" id="8_lbksn"]
 [ext_resource type="PackedScene" uid="uid://c5i5dph63mto0" path="res://Player/Rod/Rod.tscn" id="8_qqw2x"]
+[ext_resource type="PackedScene" uid="uid://b06lg3vfd3qoq" path="res://Player/BendyRod/rod_bend.tscn" id="9_m3tmr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jbqkx"]
 size = Vector2(34, 107)

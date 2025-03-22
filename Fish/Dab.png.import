@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://x8h8byf12v8p"
-path="res://.godot/imported/1.png-3180de3c3ec57d98c82c9ff12757be1d.ctex"
+uid="uid://bvkbj2xutjp7k"
+path="res://.godot/imported/Dab.png-f529d9651efbf852fbd3e7048a39d471.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Rod/1.png"
-dest_files=["res://.godot/imported/1.png-3180de3c3ec57d98c82c9ff12757be1d.ctex"]
+source_file="res://Fish/Dab.png"
+dest_files=["res://.godot/imported/Dab.png-f529d9651efbf852fbd3e7048a39d471.ctex"]
 
 [params]
 

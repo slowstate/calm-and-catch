@@ -48,6 +48,11 @@ script = ExtResource("6_q6q68")
 position = Vector2(12, -3)
 scale = Vector2(0.4, 0.4)
 
+[node name="Rod" parent="." instance=ExtResource("9_m3tmr")]
+visible = false
+position = Vector2(7, -51)
+scale = Vector2(0.5, 0.5)
+
 [connection signal="charge_hook" from="PlayerStateMachine/Idle" to="." method="_on_idle_charge_hook"]
 [connection signal="throw_hook" from="PlayerStateMachine/Idle" to="." method="_on_idle_throw_hook"]
 [connection signal="retract_hook" from="PlayerStateMachine/Waiting" to="." method="_on_waiting_retract_hook"]

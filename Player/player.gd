@@ -105,3 +105,10 @@ func stop_reeling():
 
 func get_rod_tip_global_position() -> Vector2:
 	return rod_animation.get_rod_tip_global_position()
+	#return rod.get_rod_tip_global_position()
+
+func set_rod_bend_target(target_position: Vector2):
+	rod.set_target(target_position)
+
+func reset_rod_target():
+	rod.reset_target()

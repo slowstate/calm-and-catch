@@ -116,8 +116,8 @@ func stop_reeling():
 		audio_player.stop_sound("ReelingSFX")
 
 func get_rod_tip_global_position() -> Vector2:
-	#return rod_animation.get_rod_tip_global_position()
-	return rod.get_rod_tip_global_position()
+	return rod_animation.get_rod_tip_global_position()
+	#return rod.get_rod_tip_global_position()
 
 func set_rod_bend_target(target_position: Vector2):
 	rod.set_target(target_position)

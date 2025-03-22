@@ -64,10 +64,8 @@ func _on_body_entered(body: Node2D) -> void:
 func _on_hook_box_hook_box_entered() -> void:
 	hooked_timer.wait_time = randi_range(2, 4)
 	hooked_timer.start()
-	# TODO: Play hooking animation
 
 func _on_hook_box_hook_box_exited() -> void:
-	# TODO: Stop the hooking animation
 	hooked_timer.stop()
 
 func _on_hit_box_hit_box_entered() -> void:

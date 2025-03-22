@@ -9,12 +9,6 @@ func _ready() -> void:
 	boat_spawn_timer.wait_time = randf_range(5,15)
 	boat_spawn_timer.start()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
 func _on_obstacle_spawn_timer_timeout() -> void:
 	var new_obstacle = BOAT.instantiate()
 	new_obstacle.position = random_spawn_location()

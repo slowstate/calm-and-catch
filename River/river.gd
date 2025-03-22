@@ -55,6 +55,8 @@ func _process(delta: float) -> void:
 func draw_hook_line(visible: bool, to_position: Vector2 = hook.position, from_position: Vector2 = player.get_rod_tip_global_position()):
 	hook_line.set_point_position(0, from_position)
 	hook_line.set_point_position(1, to_position)
+	
+	# Colour of hook line starts with white and gradually turns yellow > red by subtracting the below rgb values
 	hook_line.default_color = Color.WHITE - Color(
 		lerp(0.0, 0.3, pow(player.tension/player.MAX_TENSION, 5)),
 		lerp(0, 1, pow(player.tension/player.MAX_TENSION, 5)),

@@ -90,7 +90,7 @@ position = Vector2(0.145524, -7.97887)
 
 [node name="2" type="Sprite2D" parent="Body"]
 position = Vector2(9.61238, -89.9988)
-rotation = -0.00176974
+rotation = -0.00176962
 texture = ExtResource("2_0flp6")
 offset = Vector2(0, -6)
 

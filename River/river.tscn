@@ -82,6 +82,10 @@ script = ExtResource("6_kwcog")
 [node name="Player" parent="." instance=ExtResource("1_jc3st")]
 position = Vector2(532, 472)
 
+[node name="Rack" parent="." instance=ExtResource("12_mp8o1")]
+z_index = 4
+position = Vector2(105, 562)
+
 [node name="Hook" parent="." instance=ExtResource("4_a60od")]
 
 [node name="HookLine" type="Line2D" parent="."]
@@ -143,10 +147,6 @@ position = Vector2(1152, 486)
 shape = SubResource("WorldBoundaryShape2D_2ullu")
 
 [node name="AudioPlayer" parent="." instance=ExtResource("9_dfmyq")]
-
-[node name="Rack" parent="." instance=ExtResource("12_mp8o1")]
-z_index = 4
-position = Vector2(105, 562)
 
 [connection signal="max_tension" from="Player" to="." method="_on_player_max_tension"]
 [connection signal="reeling" from="Player" to="." method="_on_player_reeling"]

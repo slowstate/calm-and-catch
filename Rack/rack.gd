@@ -10,6 +10,7 @@ extends Node2D
 var is_shaking = false
 var shake = 1
 var last_caught_fish: Sprite2D
+var last_caught_fish_original_position: Vector2
 
 func _process(delta: float) -> void:
 	if is_shaking:
@@ -33,9 +34,11 @@ func fish_caught(Fish: Global.Fish):
 		Global.Fish.Muskellunge:
 			muskellunge_sprite.visible = true
 			last_caught_fish = muskellunge_sprite
+	last_caught_fish_original_position = last_caught_fish.position
 	is_shaking = true
 	shake_timer.wait_time = 1
 	shake_timer.start()
 
 func _on_shake_timer_timeout() -> void:
+	last_caught_fish.position = last_caught_fish_original_position
 	is_shaking = false

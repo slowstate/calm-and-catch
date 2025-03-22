@@ -2,8 +2,6 @@ extends Line2D
 
 var queue = []
 var max_queue_size = 10
-#var subViewport: SubViewport
-#var parent: Node2D
 var offset
 
 # Called when the node enters the scene tree for the first time.

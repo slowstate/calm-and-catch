@@ -52,7 +52,7 @@ func _process(delta: float) -> void:
 	if !audio_player.is_playing("River1") && !audio_player.is_playing("River2"):
 		audio_player.play_random_sound(["River1", "River2"], -20, -10)
 
-func draw_hook_line(visible: bool, to_position: Vector2 = hook.position, from_position: Vector2 = player.get_rod_tip_global_position()):
+func draw_hook_line(should_be_visible: bool, to_position: Vector2 = hook.position, from_position: Vector2 = player.get_rod_tip_global_position()):
 	hook_line.set_point_position(0, from_position)
 	hook_line.set_point_position(1, to_position)
 	
@@ -61,7 +61,7 @@ func draw_hook_line(visible: bool, to_position: Vector2 = hook.position, from_po
 		lerp(0.0, 0.3, pow(player.tension/player.MAX_TENSION, 5)),
 		lerp(0, 1, pow(player.tension/player.MAX_TENSION, 5)),
 		lerp(0, 1, pow(player.tension/player.MAX_TENSION, 2)), 0)
-	hook_line.visible = visible
+	hook_line.visible = should_be_visible
 	
 	
 func _on_player_throw_hook(throw_distance: Variant) -> void:
@@ -97,7 +97,7 @@ func _on_player_max_tension() -> void:
 	stop_reeling_and_reset_fish()
 	audio_player.play_random_sound(["FishEscape1", "FishEscape2"])
 
-func _on_fish_spawn_zone_fish_obstacle_hit(fish: Variant) -> void:
+func _on_fish_spawn_zone_fish_obstacle_hit(_fish: Variant) -> void:
 	stop_reeling_and_reset_fish()
 	audio_player.play_random_sound(["FishEscape1", "FishEscape2"])
 

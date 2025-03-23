@@ -26,7 +26,7 @@ func _ready() -> void:
 	set_fish_type()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if !hooked_timer.is_stopped():
 		shake *= -1
 		position.x += 5 * shake
@@ -58,7 +58,7 @@ func _on_hooked_timer_timeout() -> void:
 	hit_box.monitoring = true
 	sprite_animation.play("fish hooked")
 
-func _on_body_entered(body: Node2D) -> void:
+func _on_body_entered(_body: Node2D) -> void:
 	caught.emit(self)
 
 func _on_hook_box_hook_box_entered() -> void:

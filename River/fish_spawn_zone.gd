@@ -13,11 +13,6 @@ func _ready() -> void:
 	fish_spawn_timer.start()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
 func _on_fish_spawn_timer_timeout() -> void:
 	var new_fish = FISH.instantiate()
 	new_fish.hooked.connect(on_fish_hooked)

@@ -2,6 +2,7 @@ class_name State
 
 extends Node
 
+@warning_ignore("unused_signal")
 signal transition(new_state_name: StringName)
 
 func enter() -> void:
@@ -10,8 +11,8 @@ func enter() -> void:
 func exit() -> void:
 	pass
 	
-func update(delta: float) -> void:
+func update(_delta: float) -> void:
 	pass
 	
-func physics_update(delta: float) -> void:
+func physics_update(_delta: float) -> void:
 	pass

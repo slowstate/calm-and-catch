@@ -87,9 +87,9 @@ func begin_reeling(Fish: Global.Fish):
 		Global.Fish.BrookTrout || Global.Fish.BrownTrout:
 			pass
 		Global.Fish.Carp || Global.Fish.Dab:
-			tension_increase = 120
+			tension_increase = 110
 		Global.Fish.Muskellunge:
-			tension_increase = 130
+			tension_increase = 120
 	player_state_machine.on_child_transition("Reeling")
 
 func _on_reeling_reeling() -> void:

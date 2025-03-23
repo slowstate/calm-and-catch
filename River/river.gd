@@ -66,7 +66,7 @@ func draw_hook_line(should_be_visible: bool, to_position: Vector2 = hook.positio
 	
 	
 func _on_player_throw_hook(throw_distance: Variant) -> void:
-	hook.position = player.position
+	hook.position = player.get_rod_tip_global_position()
 	hook_throw_distance = throw_distance
 	hook.visible = true
 	await get_tree().create_timer(throw_distance/player.MAX_HOOK_THROW_DISTANCE*0.25).timeout

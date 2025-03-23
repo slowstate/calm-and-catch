@@ -15,48 +15,48 @@ tip_nodepath = NodePath("6/5/4/3/2/1")
 ccdik_data_chain_length = 5
 joint_data/0/bone_index = 0
 joint_data/0/bone2d_node = NodePath("6")
-joint_data/0/rotate_from_joint = false
+joint_data/0/rotate_from_joint = true
 joint_data/0/enable_constraint = true
 joint_data/0/constraint_angle_min = -5.0
 joint_data/0/constraint_angle_max = 5.0
 joint_data/0/constraint_angle_invert = true
-joint_data/0/constraint_in_localspace = true
+joint_data/0/constraint_in_localspace = false
 joint_data/0/editor_draw_gizmo = true
 joint_data/1/bone_index = 1
 joint_data/1/bone2d_node = NodePath("6/5")
-joint_data/1/rotate_from_joint = false
+joint_data/1/rotate_from_joint = true
 joint_data/1/enable_constraint = true
 joint_data/1/constraint_angle_min = -7.0
 joint_data/1/constraint_angle_max = 7.0
 joint_data/1/constraint_angle_invert = true
-joint_data/1/constraint_in_localspace = true
+joint_data/1/constraint_in_localspace = false
 joint_data/1/editor_draw_gizmo = true
 joint_data/2/bone_index = 2
 joint_data/2/bone2d_node = NodePath("6/5/4")
-joint_data/2/rotate_from_joint = false
+joint_data/2/rotate_from_joint = true
 joint_data/2/enable_constraint = true
 joint_data/2/constraint_angle_min = -10.0
 joint_data/2/constraint_angle_max = 10.0
 joint_data/2/constraint_angle_invert = true
-joint_data/2/constraint_in_localspace = true
+joint_data/2/constraint_in_localspace = false
 joint_data/2/editor_draw_gizmo = true
 joint_data/3/bone_index = 3
 joint_data/3/bone2d_node = NodePath("6/5/4/3")
-joint_data/3/rotate_from_joint = false
+joint_data/3/rotate_from_joint = true
 joint_data/3/enable_constraint = true
 joint_data/3/constraint_angle_min = -20.0
 joint_data/3/constraint_angle_max = 20.0
 joint_data/3/constraint_angle_invert = true
-joint_data/3/constraint_in_localspace = true
+joint_data/3/constraint_in_localspace = false
 joint_data/3/editor_draw_gizmo = true
 joint_data/4/bone_index = 4
 joint_data/4/bone2d_node = NodePath("6/5/4/3/2")
-joint_data/4/rotate_from_joint = false
+joint_data/4/rotate_from_joint = true
 joint_data/4/enable_constraint = true
 joint_data/4/constraint_angle_min = -30.0
 joint_data/4/constraint_angle_max = 30.0
 joint_data/4/constraint_angle_invert = true
-joint_data/4/constraint_in_localspace = true
+joint_data/4/constraint_in_localspace = false
 joint_data/4/editor_draw_gizmo = true
 
 [sub_resource type="SkeletonModification2DLookAt" id="SkeletonModification2DLookAt_q4yvi"]
@@ -103,6 +103,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(-241, -337), Vector2(9, -401)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Bones/Skeleton2D:modification_stack:enabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_6b7al"]
 length = 0.001
@@ -129,6 +141,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(9, -353)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Bones/Skeleton2D:modification_stack:enabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_33lyn"]
@@ -158,6 +182,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(9, -401), Vector2(-241, -337)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Bones/Skeleton2D:modification_stack:enabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_no4hr"]
 _data = {
@@ -173,7 +209,8 @@ script = ExtResource("1_hjv5a")
 
 [node name="1" type="Sprite2D" parent="Body"]
 position = Vector2(9, -231)
-rotation = 0.0209171
+rotation = -0.0210493
+scale = Vector2(0.999865, 0.999865)
 texture = ExtResource("1_arp5w")
 offset = Vector2(0, -4)
 
@@ -250,7 +287,7 @@ position = Vector2(0, -11)
 rest = Transform2D(1, 0, 0, 1, 0, -11)
 auto_calculate_length_and_angle = false
 length = 7.0
-bone_angle = -92.812
+bone_angle = -90.0
 editor_settings/show_bone_gizmo = false
 metadata/_local_pose_override_enabled_ = true
 

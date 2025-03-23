@@ -17,8 +17,9 @@ void vertex() {
 
 void fragment() {
 	// Called for every pixel the material is visible on.
-	float depth = texture(noise1, UV + scroll1 * TIME).r * texture(noise2, UV + scroll2 * TIME).r * clamp(0.75-SCREEN_UV.y, 0.0, 0.6);
-	vec4 screen_col = texture(SCREEN_TEXTURE, SCREEN_UV + distortion_strength * vec2(depth));
+	//vec4 noise_value = texture(noise1, UV);
+	float depth = textureLod(noise1, UV + scroll1 * TIME, 0.0).r * textureLod(noise2, UV + scroll2 * TIME, 0.0).r * clamp(0.75-SCREEN_UV.y, 0.0, 0.6);
+	vec4 screen_col = textureLod(SCREEN_TEXTURE, SCREEN_UV + distortion_strength * vec2(depth), 0.0);
 	vec4 top_light = smoothstep(light_start, light_end, depth) * top_color;
 	COLOR = screen_col + top_light;
 	COLOR.a = 1.0;

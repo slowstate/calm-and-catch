@@ -39,11 +39,11 @@ func _process(delta: float) -> void:
 		if reeling:
 			normalised_vector = (player.position-hooked_fish.position).normalized()
 			hooked_fish.position += normalised_vector * REELING_SPEED * delta
-			hooked_fish.rotation = normalised_vector.angle() - deg_to_rad(90) + deg_to_rad(14)
+			hooked_fish.rotation = normalised_vector.angle() - deg_to_rad(90)
 			draw_hook_line(true, hooked_fish.get_fish_head_global_position())
 		else:
 			hooked_fish.position.y -= hooked_fish.speed * delta
-			hooked_fish.rotation = deg_to_rad(180 + 14)
+			hooked_fish.rotation = deg_to_rad(180)
 			draw_hook_line(true, hooked_fish.get_fish_head_global_position())
 		if hooked_fish.position.y < get_viewport_rect().position.y - 50:
 			reset_hook()

@@ -12,7 +12,7 @@ var shake = 1
 var last_caught_fish: Sprite2D
 var last_caught_fish_original_position: Vector2
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if is_shaking:
 		shake *= -1
 		last_caught_fish.position.x += 2 * shake

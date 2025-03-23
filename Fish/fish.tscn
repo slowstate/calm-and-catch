@@ -528,10 +528,11 @@ collision_mask = 7
 script = ExtResource("1_pktc1")
 
 [node name="SpriteAnimation" type="AnimatedSprite2D" parent="."]
+rotation = 0.244346
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_thuap")
 autoplay = "default"
-frame_progress = 0.726896
+frame_progress = 0.441709
 
 [node name="FishHead" type="Sprite2D" parent="SpriteAnimation"]
 position = Vector2(16.6667, 60)
@@ -559,6 +560,11 @@ one_shot = true
 
 [node name="CaughtHitBox" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_t5pl3")
+
+[node name="FadeInTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

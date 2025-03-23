@@ -691,6 +691,9 @@ rest = Transform2D(1, 0, 0, 1, -113, 383)
 [node name="Bone2D" type="Bone2D" parent="Character Container/Bones/Skeleton2D/Hip/ArmL/ForearmL"]
 position = Vector2(62, -81)
 rest = Transform2D(1, 0, 0, 1, 62, -81)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 0.0
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Character Container/Bones/Skeleton2D/Hip/ArmL/ForearmL"]
 position = Vector2(37, -40)
@@ -711,6 +714,9 @@ rest = Transform2D(1, 0, 0, 1, 122, 396)
 [node name="HandR" type="Bone2D" parent="Character Container/Bones/Skeleton2D/Hip/ArmR/ForearmR"]
 position = Vector2(72, -82)
 rest = Transform2D(1, 0, 0, 1, 72, -82)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 0.0
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Character Container/Bones/Skeleton2D/Hip/ArmR/ForearmR"]
 position = Vector2(36, -44)

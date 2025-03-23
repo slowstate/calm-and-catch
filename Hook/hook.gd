@@ -6,7 +6,7 @@ var original_position: Vector2
 var random_offset = 0
 var is_bobbing = false
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if is_bobbing:
 		position.y = original_position.y + sin(Time.get_unix_time_from_system()) * 4
 

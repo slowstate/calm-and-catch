@@ -11,10 +11,10 @@ func enter() -> void:
 func exit() -> void:
 	pass
 	
-func update(delta: float) -> void:
+func update(_delta: float) -> void:
 	pass
 	
-func physics_update(delta: float) -> void:
+func physics_update(_delta: float) -> void:
 	#print("Throw timer, time left: " + str(throw_charge_timer.time_left))
 	# Throw hook.
 	if Input.is_action_just_pressed("player_primary_action"):

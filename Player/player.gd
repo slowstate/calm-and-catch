@@ -4,7 +4,6 @@ extends CharacterBody2D
 @onready var player_state_machine: PlayerStateMachine = $PlayerStateMachine
 @onready var audio_player: Node2D = $AudioPlayer
 @onready var character_animation: Node2D = $"Character Animation"
-@onready var rod_animation: Node2D = $RodAnimation
 @onready var rod: Node2D = $Rod
 
 signal throw_hook(throw_distance)
@@ -52,8 +51,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		tension = max(tension - 150 * delta, MIN_TENSION)
 	
-	rod_animation.set_color(Vector3(tension/MAX_TENSION, min(tension/MAX_TENSION, 0.3), 0))
-	
 	if tension >= MAX_TENSION:
 		max_tension.emit()
 		stop_reeling()
@@ -65,16 +62,16 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _on_idle_charge_hook() -> void:
-	rod_animation.play_animation("Cast_2")
-	throw_charge_timer.wait_time = 3
+	rod.play_animation("Wind")
+	throw_charge_timer.wait_time = 2
 	throw_charge_timer.start()
 
 func _on_idle_throw_hook() -> void:
-	var charge_percentage: float = (3 - throw_charge_timer.time_left)/3
+	var charge_percentage: float = 1-throw_charge_timer.time_left/throw_charge_timer.wait_time
 	throw_charge_timer.stop()
 	var throw_distance = MAX_HOOK_THROW_DISTANCE * charge_percentage
-	rod_animation.play_animation("Throw")
-	rod_animation.seek(charge_percentage)
+	rod.play_animation("Cast")
+	rod.seek(charge_percentage)
 	throw_hook.emit(throw_distance)
 	if charge_percentage <= 0.5:
 		audio_player.play_sound("RodThrowShort")
@@ -116,9 +113,7 @@ func stop_reeling():
 		audio_player.stop_sound("ReelingSFX")
 
 func get_rod_tip_global_position() -> Vector2:
-	return rod_animation.get_rod_tip_global_position()
-	# TODO: Uncomment to attach fishing line to bendy rod tip - awaiting bendy rod throw animations
-	#return rod.get_rod_tip_global_position()
+	return rod.get_rod_tip_global_position()
 
 func set_rod_bend_target(target_position: Vector2):
 	rod.set_target(target_position)

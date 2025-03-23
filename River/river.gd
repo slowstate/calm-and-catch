@@ -18,6 +18,7 @@ var reeling = false
 func _ready() -> void:
 	hook.visible = false
 	audio_player.play_sound("BGM",10,10,1,1)
+	audio_player.play_sound("Wildlife",-5,5,.9,1.1)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

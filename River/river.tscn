@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dvkv21wkwo18p"]
+[gd_scene load_steps=34 format=3 uid="uid://dvkv21wkwo18p"]
 
 [ext_resource type="Script" path="res://River/river.gd" id="1_f45dc"]
 [ext_resource type="PackedScene" uid="uid://bhl8fy0l6levh" path="res://Player/player.tscn" id="1_jc3st"]
@@ -42,6 +42,9 @@ shader_parameter/light_end = 0.35
 shader_parameter/noise1 = SubResource("NoiseTexture2D_qrxr6")
 shader_parameter/noise2 = SubResource("NoiseTexture2D_oivn2")
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_vox1i"]
+polygon = PackedVector2Array(524, 421, 520, 423, 517, 426, 515, 429, 514, 431, 513, 434, 513, 437, 513, 439, 513, 441, 514, 443, 516, 444, 518, 445, 520, 445, 522, 445, 520, 446, 519, 448, 517, 455, 515, 459, 513, 464, 512, 465, 514, 466, 514, 467, 513, 471, 513, 473, 515, 473, 516, 473, 517, 472, 518, 471, 517, 490, 516, 494, 517, 495, 519, 495, 520, 505, 522, 505, 522, 525, 528, 525, 528, 521, 527, 521, 526, 506, 528, 505, 528, 497, 530, 497, 531, 505, 533, 506, 535, 525, 540, 525, 540, 522, 539, 520, 538, 505, 540, 505, 539, 497, 540, 496, 539, 491, 540, 489, 541, 484, 539, 475, 538, 472, 539, 472, 541, 474, 542, 473, 547, 468, 547, 466, 547, 465, 545, 465, 542, 467, 542, 466, 543, 463, 537, 446, 531, 444, 531, 442, 536, 440, 539, 436, 541, 431, 542, 427, 540, 423, 538, 421, 534, 419, 529, 419)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j3qnw"]
 size = Vector2(1100, 250)
 
@@ -57,6 +60,49 @@ normal = Vector2(1, 0)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_2ullu"]
 normal = Vector2(-1, 0)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lcijc"]
+blend_mode = 1
+light_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_rj8rs"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_n2o6j"]
+gradient = SubResource("Gradient_rj8rs")
+width = 15
+height = 15
+fill = 1
+fill_from = Vector2(0.494624, 0.467742)
+fill_to = Vector2(0.360215, 0.327957)
+
+[sub_resource type="Curve" id="Curve_8hi07"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.461538), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_nq0ed"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_p3c1a"]
+gradient = SubResource("Gradient_nq0ed")
+fill = 1
+fill_from = Vector2(0.506098, 0.359756)
+fill_to = Vector2(0.890244, 0.054878)
+
+[sub_resource type="Gradient" id="Gradient_h3lkc"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_v7vlu"]
+gradient = SubResource("Gradient_h3lkc")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.097561, 0.195122)
+
+[sub_resource type="Environment" id="Environment_sbncb"]
+background_mode = 3
+glow_enabled = true
+glow_blend_mode = 1
+glow_hdr_threshold = 1.5
+
 [node name="River" type="Node2D"]
 script = ExtResource("1_f45dc")
 
@@ -68,8 +114,8 @@ texture = ExtResource("2_56yy5")
 [node name="WaterShader" type="Sprite2D" parent="."]
 z_index = 2
 material = SubResource("ShaderMaterial_pbwnt")
-position = Vector2(576, 262.5)
-scale = Vector2(9, 4.10156)
+position = Vector2(576, 323)
+scale = Vector2(9, 5.0625)
 texture = ExtResource("3_xayg8")
 
 [node name="Lily" type="Sprite2D" parent="."]
@@ -83,9 +129,9 @@ script = ExtResource("6_kwcog")
 z_index = 7
 position = Vector2(532, 472)
 
-[node name="Rack" parent="." instance=ExtResource("12_mp8o1")]
-z_index = 4
-position = Vector2(105, 562)
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Player"]
+position = Vector2(-532, -472)
+occluder = SubResource("OccluderPolygon2D_vox1i")
 
 [node name="Hook" parent="." instance=ExtResource("4_a60od")]
 
@@ -148,6 +194,58 @@ position = Vector2(1152, 486)
 shape = SubResource("WorldBoundaryShape2D_2ullu")
 
 [node name="AudioPlayer" parent="." instance=ExtResource("9_dfmyq")]
+
+[node name="Rack" parent="." instance=ExtResource("12_mp8o1")]
+z_index = 4
+position = Vector2(105, 562)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+show_behind_parent = true
+color = Color(0.230487, 0.329676, 0.585165, 1)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+modulate = Color(2, 2, 2, 1)
+material = SubResource("CanvasItemMaterial_lcijc")
+position = Vector2(441, 570)
+lifetime = 10.0
+texture = SubResource("GradientTexture2D_n2o6j")
+emission_shape = 1
+emission_sphere_radius = 20.0
+direction = Vector2(0, 0)
+spread = 100.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 2.0
+initial_velocity_max = 3.0
+orbit_velocity_min = -0.3
+orbit_velocity_max = 0.3
+scale_amount_min = 1.5
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_8hi07")
+hue_variation_min = 0.01
+hue_variation_max = 0.13
+
+[node name="PointLight2D3" type="PointLight2D" parent="."]
+position = Vector2(558, 35)
+scale = Vector2(4.5625, 3.96875)
+energy = 0.25
+texture = SubResource("GradientTexture2D_p3c1a")
+
+[node name="PointLight2D4" type="PointLight2D" parent="."]
+position = Vector2(566, 135)
+scale = Vector2(13.2207, 9.78174)
+energy = 0.2
+texture = SubResource("GradientTexture2D_p3c1a")
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+position = Vector2(217, 599)
+scale = Vector2(55.9375, 50.9375)
+energy = 0.4
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_v7vlu")
+texture_scale = 0.1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_sbncb")
 
 [connection signal="max_tension" from="Player" to="." method="_on_player_max_tension"]
 [connection signal="reeling" from="Player" to="." method="_on_player_reeling"]

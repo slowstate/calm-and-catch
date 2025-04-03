@@ -128,6 +128,85 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D/Target:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(9, -353)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Bones/Skeleton2D:modification_stack:enabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_33lyn"]
+resource_name = "Wind"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bones:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -0.349066]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D/Target:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(9, -401), Vector2(-241, -337)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Bones/Skeleton2D:modification_stack:enabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_6b7al"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bones:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
 "values": [-0.523599]
 }
 tracks/1/type = "value"
@@ -184,9 +263,13 @@ script = ExtResource("1_hjv5a")
 [node name="Body" type="Node2D" parent="."]
 
 [node name="1" type="Sprite2D" parent="Body"]
-position = Vector2(-24.2928, -231.773)
-rotation = -1.13446
-scale = Vector2(0.999999, 0.999999)
+<<<<<<< Updated upstream
+position = Vector2(-142.364, -167.679)
+rotation = -1.7561
+=======
+position = Vector2(9, -231)
+rotation = -0.0281614
+>>>>>>> Stashed changes
 texture = ExtResource("1_arp5w")
 offset = Vector2(0, -4)
 
@@ -194,34 +277,32 @@ offset = Vector2(0, -4)
 position = Vector2(0.145524, -7.97887)
 
 [node name="2" type="Sprite2D" parent="Body"]
-position = Vector2(-18.7923, -222.246)
-rotation = -0.523599
-scale = Vector2(1, 1)
+position = Vector2(-131.604, -169.966)
+rotation = -1.78024
 texture = ExtResource("2_0flp6")
 offset = Vector2(0, -6)
 
 [node name="3" type="Sprite2D" parent="Body"]
-position = Vector2(-12.9784, -206.272)
-rotation = -0.349066
-scale = Vector2(1, 1)
+position = Vector2(-115.437, -164.713)
+rotation = -1.25664
 texture = ExtResource("3_y1fn6")
 offset = Vector2(0, -9)
 
 [node name="4" type="Sprite2D" parent="Body"]
-position = Vector2(-9.50544, -186.575)
-rotation = -0.174533
+position = Vector2(-99.6766, -152.4)
+rotation = -0.907571
 texture = ExtResource("4_6edgg")
 offset = Vector2(0, -10)
 
 [node name="5" type="Sprite2D" parent="Body"]
-position = Vector2(-6.09301, -158.784)
-rotation = -0.122173
+position = Vector2(-80.941, -131.591)
+rotation = -0.733038
 texture = ExtResource("5_ixj8x")
 offset = Vector2(0, -13)
 
 [node name="6" type="Sprite2D" parent="Body"]
-position = Vector2(5.81259, -22.3014)
-rotation = -0.0872662
+position = Vector2(-2.45662, -19.2917)
+rotation = -0.610865
 texture = ExtResource("6_578w8")
 offset = Vector2(0, -69)
 
@@ -230,7 +311,6 @@ position = Vector2(4.99999, 24.0001)
 texture = ExtResource("8_h4iks")
 
 [node name="Bones" type="Node2D" parent="."]
-rotation = -0.523599
 
 [node name="Skeleton2D" type="Skeleton2D" parent="Bones"]
 position = Vector2(7, -148)
@@ -299,7 +379,7 @@ remote_path = NodePath("../../../../Body/6")
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="Target" type="Node2D" parent="Node2D"]
-position = Vector2(-426, -79)
+position = Vector2(9, -353)
 
 [node name="Lookat" type="Node2D" parent="Node2D/Target"]
 position = Vector2(-4, -20)

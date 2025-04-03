@@ -12,6 +12,7 @@ const HOOK_THROW_SPEED = 10
 var normalised_vector
 var hook_throw_distance
 var hooked_fish: Area2D
+var hooked_collectible: Area2D
 var reeling = false
 
 # Called when the node enters the scene tree for the first time.
@@ -50,6 +51,14 @@ func _process(delta: float) -> void:
 			stop_reeling_and_reset_fish()
 			audio_player.play_random_sound(["FishEscape1", "FishEscape2"])
 	
+	if hooked_collectible != null:
+		player.set_rod_bend_target(hooked_fish.position)
+		if reeling:
+			normalised_vector = (player.position-hooked_fish.position).normalized()
+			hooked_fish.position += normalised_vector * REELING_SPEED * delta
+			hooked_fish.rotation = normalised_vector.angle() - deg_to_rad(90)
+			draw_hook_line(true, hooked_collectible.position)
+	
 	if !audio_player.is_playing("River1") && !audio_player.is_playing("River2"):
 		audio_player.play_random_sound(["River1", "River2"], -20, -10)
 
@@ -80,7 +89,6 @@ func _on_fish_spawn_zone_fish_hooked(fish: Variant) -> void:
 	reset_hook()
 	player.begin_reeling(fish.fish_type)
 	hooked_fish = fish
-	hook.visible = false
 	audio_player.play_random_sound(["FishHooked1", "FishHooked2"])
 
 func _on_player_reeling() -> void:
@@ -120,3 +128,18 @@ func _on_river_1_finished() -> void:
 
 func _on_river_2_finished() -> void:
 	audio_player.play_random_sound(["River1", "River2"], -10, -5)
+
+
+func _on_obstacle_spawn_zone_collectible_caught(collectible: Variant) -> void:
+	pass # Replace with function body.
+
+
+func _on_obstacle_spawn_zone_collectible_hooked(collectible: Variant) -> void:
+	reset_hook()
+	player.begin_reeling_collectible()
+	hooked_collectible = collectible
+	#audio_player.play_random_sound(["FishHooked1", "FishHooked2"])
+
+
+func _on_obstacle_spawn_zone_collectible_obstacle_hit(collectible: Variant) -> void:
+	pass # Replace with function body.

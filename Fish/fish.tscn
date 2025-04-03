@@ -528,6 +528,7 @@ collision_mask = 7
 script = ExtResource("1_pktc1")
 
 [node name="SpriteAnimation" type="AnimatedSprite2D" parent="."]
+modulate = Color(8, 8, 8, 1)
 rotation = 0.244346
 scale = Vector2(0.6, 0.6)
 sprite_frames = SubResource("SpriteFrames_thuap")

@@ -263,8 +263,13 @@ script = ExtResource("1_hjv5a")
 [node name="Body" type="Node2D" parent="."]
 
 [node name="1" type="Sprite2D" parent="Body"]
+<<<<<<< Updated upstream
 position = Vector2(-142.364, -167.679)
 rotation = -1.7561
+=======
+position = Vector2(9, -231)
+rotation = -0.0281614
+>>>>>>> Stashed changes
 texture = ExtResource("1_arp5w")
 offset = Vector2(0, -4)
 

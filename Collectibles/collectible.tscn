@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://dt4xaqmtcsut6"]
+
+[ext_resource type="Script" path="res://Collectibles/collectible.gd" id="1_bdjri"]
+[ext_resource type="Texture2D" uid="uid://bb2lst7mvcr1s" path="res://Collectibles/collectiblePlaceholder.png" id="2_0f80h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0cdqc"]
+radius = 30.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1luax"]
+radius = 30.0167
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b0qpl"]
+radius = 30.0167
+
+[node name="Collectible" type="Area2D"]
+z_index = 4
+collision_layer = 0
+collision_mask = 7
+script = ExtResource("1_bdjri")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1.43051e-06, -1.43051e-06)
+scale = Vector2(0.0591837, 0.0591837)
+texture = ExtResource("2_0f80h")
+
+[node name="DespawnTimer" type="Timer" parent="."]
+wait_time = 50.0
+
+[node name="ColHookBox2" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="ColHookBox" type="CollisionShape2D" parent="ColHookBox2"]
+shape = SubResource("CircleShape2D_0cdqc")
+
+[node name="ColHitBox2" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="ColHitBox" type="CollisionShape2D" parent="ColHitBox2"]
+shape = SubResource("CircleShape2D_1luax")
+
+[node name="CaughtColHitBox" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_b0qpl")
+
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]
+[connection signal="area_entered" from="ColHookBox2" to="." method="_on_col_hook_box_2_area_entered"]
+[connection signal="area_entered" from="ColHitBox2" to="." method="_on_col_hit_box_2_area_entered"]

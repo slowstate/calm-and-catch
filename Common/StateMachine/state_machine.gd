@@ -26,9 +26,10 @@ func on_child_transition(new_state_name: StringName) -> void:
 	var new_state = states.get(new_state_name)
 	if new_state != null:
 		if new_state != CURRENT_STATE:
-			print_debug("Current state: " + str(CURRENT_STATE.name) + " | New state: " + str(new_state.name))
+			#print_debug("Current state: " + str(CURRENT_STATE.name) + " | New state: " + str(new_state.name))
 			CURRENT_STATE.exit()
 			new_state.enter()
 			CURRENT_STATE = new_state
 		else:
-			print_debug("Current state and new state are the same")
+			#print_debug("Current state and new state are the same")
+			pass

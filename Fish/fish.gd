@@ -38,18 +38,23 @@ func _process(delta: float) -> void:
 func set_fish_type():
 	var random_int = randi_range(1,100)
 	if random_int <= 5: # 5% chance
+		sprite_animation.speed_scale = 1.7
 		fish_type = Global.Fish.Muskellunge
 		speed = 80
 	elif random_int <= 15: # 10% chance
+		sprite_animation.speed_scale = 1.2
 		fish_type = Global.Fish.Dab
 		speed = 70
 	elif random_int <= 30: # 15% chance
+		sprite_animation.speed_scale = 1.2
 		fish_type = Global.Fish.Carp
 		speed = 70
 	elif random_int <= 60: # 30% chance
+		sprite_animation.speed_scale = 1
 		fish_type = Global.Fish.BrownTrout
 		speed = 50
 	else: # 40% chance
+		sprite_animation.speed_scale = 1
 		fish_type = Global.Fish.BrookTrout
 		speed = 50
 

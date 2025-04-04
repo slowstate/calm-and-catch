@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dt4xaqmtcsut6"]
+[gd_scene load_steps=6 format=3 uid="uid://dfxvbclo6xk54"]
 
 [ext_resource type="Script" path="res://Collectibles/collectible.gd" id="1_bdjri"]
 [ext_resource type="Texture2D" uid="uid://bb2lst7mvcr1s" path="res://Collectibles/collectiblePlaceholder.png" id="2_0f80h"]
@@ -44,6 +44,7 @@ shape = SubResource("CircleShape2D_1luax")
 visible = false
 shape = SubResource("CircleShape2D_b0qpl")
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]
 [connection signal="area_entered" from="ColHookBox2" to="." method="_on_col_hook_box_2_area_entered"]
 [connection signal="area_entered" from="ColHitBox2" to="." method="_on_col_hit_box_2_area_entered"]

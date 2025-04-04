@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://dvkv21wkwo18p"]
+[gd_scene load_steps=59 format=3 uid="uid://dvkv21wkwo18p"]
 
 [ext_resource type="Script" path="res://River/river.gd" id="1_f45dc"]
 [ext_resource type="PackedScene" uid="uid://bhl8fy0l6levh" path="res://Player/player.tscn" id="1_jc3st"]
@@ -10,7 +10,9 @@
 [ext_resource type="Script" path="res://River/obstacle_spawn_zone.gd" id="5_efqls"]
 [ext_resource type="Texture2D" uid="uid://4x4j1fhhhikm" path="res://River/Lily.png" id="5_j0r74"]
 [ext_resource type="Script" path="res://River/lily.gd" id="6_kwcog"]
+[ext_resource type="Texture2D" uid="uid://ctafpdkjpi2hn" path="res://Collectibles/Guitar.png" id="7_evxq4"]
 [ext_resource type="Texture2D" uid="uid://c5m6803fjceqn" path="res://Collectibles/Bonsai.png" id="7_k41ox"]
+[ext_resource type="Texture2D" uid="uid://wc2qpigbakxt" path="res://Collectibles/Tree Stump.png" id="8_7oui7"]
 [ext_resource type="PackedScene" uid="uid://bes8e7lnvdei5" path="res://Common/audio_player.tscn" id="9_dfmyq"]
 [ext_resource type="Script" path="res://River/boat_spawn_zone.gd" id="11_fy606"]
 [ext_resource type="PackedScene" uid="uid://bbst3n3gkcp3c" path="res://Rack/rack.tscn" id="12_mp8o1"]
@@ -103,29 +105,29 @@ fill = 1
 fill_from = Vector2(0.517094, 0.461538)
 fill_to = Vector2(0.863248, 0.149573)
 
-[sub_resource type="Gradient" id="Gradient_ihod3"]
+[sub_resource type="Gradient" id="Gradient_nnnes"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0.086)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_0f5es"]
-gradient = SubResource("Gradient_ihod3")
+gradient = SubResource("Gradient_nnnes")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.337607, 0.0811966)
 
-[sub_resource type="Gradient" id="Gradient_77ncy"]
+[sub_resource type="Gradient" id="Gradient_a07t7"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_lh8wf"]
-gradient = SubResource("Gradient_77ncy")
+gradient = SubResource("Gradient_a07t7")
 fill = 1
 fill_from = Vector2(0.504274, 0.495726)
 fill_to = Vector2(0.846154, 0.209402)
 
-[sub_resource type="Gradient" id="Gradient_p7tfr"]
+[sub_resource type="Gradient" id="Gradient_6f6td"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_q223t"]
-gradient = SubResource("Gradient_p7tfr")
+gradient = SubResource("Gradient_6f6td")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.205128, 0.811966)
@@ -219,6 +221,19 @@ scale = Vector2(0.6, 0.6)
 texture = ExtResource("5_j0r74")
 script = ExtResource("6_kwcog")
 
+[node name="Tree Stump" type="Sprite2D" parent="."]
+position = Vector2(864, 601)
+texture = ExtResource("8_7oui7")
+
+[node name="Tree Stump2" type="Sprite2D" parent="."]
+position = Vector2(978, 600)
+texture = ExtResource("8_7oui7")
+
+[node name="Guitar" type="Sprite2D" parent="Tree Stump2"]
+z_index = 1
+position = Vector2(4, -25)
+texture = ExtResource("7_evxq4")
+
 [node name="Bonsai" type="Sprite2D" parent="."]
 z_index = 1
 position = Vector2(1050, 574)
@@ -300,7 +315,6 @@ shape = SubResource("WorldBoundaryShape2D_2ullu")
 [node name="AudioPlayer" parent="." instance=ExtResource("9_dfmyq")]
 
 [node name="Lighting" type="Node2D" parent="."]
-visible = false
 
 [node name="Bonfire" type="Sprite2D" parent="Lighting"]
 material = SubResource("CanvasItemMaterial_etn7h")
@@ -438,7 +452,6 @@ color = Color(0.0639465, 0.304457, 0.469044, 1)
 environment = SubResource("Environment_xifc1")
 
 [node name="Effects" type="Node2D" parent="."]
-visible = false
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Effects"]
 z_index = 1

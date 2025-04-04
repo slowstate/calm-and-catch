@@ -12,7 +12,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	position.x +=  speed * delta
+	position.x += speed * delta
 	position.y = original_position.y + sin(Time.get_unix_time_from_system() + random_offset) * 6
 
 func _on_despawn_timer_timeout() -> void:

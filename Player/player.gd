@@ -91,6 +91,9 @@ func begin_reeling(Fish: Global.Fish):
 		Global.Fish.Muskellunge:
 			tension_increase = 120
 	player_state_machine.on_child_transition("Reeling")
+	
+func begin_reeling_collectible():
+	player_state_machine.on_child_transition("Reeling")
 
 func _on_reeling_reeling() -> void:
 	raise_tension = true

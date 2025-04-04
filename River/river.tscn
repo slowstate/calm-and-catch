@@ -472,5 +472,8 @@ visibility_rect = Rect2(-575, -60, 1150, 120)
 [connection signal="fish_hooked" from="FishSpawnZone" to="." method="_on_fish_spawn_zone_fish_hooked"]
 [connection signal="fish_obstacle_hit" from="FishSpawnZone" to="." method="_on_fish_spawn_zone_fish_obstacle_hit"]
 [connection signal="timeout" from="FishSpawnZone/FishSpawnTimer" to="FishSpawnZone" method="_on_fish_spawn_timer_timeout"]
+[connection signal="collectible_caught" from="ObstacleSpawnZone" to="." method="_on_obstacle_spawn_zone_collectible_caught"]
+[connection signal="collectible_hooked" from="ObstacleSpawnZone" to="." method="_on_obstacle_spawn_zone_collectible_hooked"]
+[connection signal="collectible_obstacle_hit" from="ObstacleSpawnZone" to="." method="_on_obstacle_spawn_zone_collectible_obstacle_hit"]
 [connection signal="timeout" from="ObstacleSpawnZone/ObstacleSpawnTimer" to="ObstacleSpawnZone" method="_on_obstacle_spawn_timer_timeout"]
 [connection signal="timeout" from="BoatSpawnZone/BoatSpawnTimer" to="BoatSpawnZone" method="_on_obstacle_spawn_timer_timeout"]

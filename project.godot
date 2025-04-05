@@ -56,5 +56,6 @@ player_move_right={
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+viewport/hdr_2d=true
 textures/stretch/mode="canvas_items"
 textures/stretch/scale=1.0

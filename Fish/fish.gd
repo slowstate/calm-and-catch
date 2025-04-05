@@ -90,3 +90,9 @@ func _on_hook_box_hook_box_exited() -> void:
 
 func _on_hit_box_hit_box_entered() -> void:
 	obstacle_hit.emit(self)
+
+func set_night_mode(is_enabled: bool):
+	if is_enabled:
+		sprite_animation.modulate = Color(8, 8, 8, 1)
+	else:
+		sprite_animation.modulate = Color(1, 1, 1, 1)

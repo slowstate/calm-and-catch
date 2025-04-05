@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dt4xaqmtcsut6"]
+[gd_scene load_steps=6 format=3 uid="uid://dfxvbclo6xk54"]
 
 [ext_resource type="Script" path="res://Collectibles/collectible.gd" id="1_bdjri"]
-[ext_resource type="Texture2D" uid="uid://bb2lst7mvcr1s" path="res://Collectibles/collectiblePlaceholder.png" id="2_0f80h"]
+[ext_resource type="Texture2D" uid="uid://dmamd1fjk0uj3" path="res://Collectibles/Lantern.png" id="2_pwdab"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0cdqc"]
 radius = 30.0
@@ -20,8 +20,8 @@ script = ExtResource("1_bdjri")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-1.43051e-06, -1.43051e-06)
-scale = Vector2(0.0591837, 0.0591837)
-texture = ExtResource("2_0f80h")
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_pwdab")
 
 [node name="DespawnTimer" type="Timer" parent="."]
 wait_time = 50.0
@@ -36,6 +36,7 @@ shape = SubResource("CircleShape2D_0cdqc")
 [node name="ColHitBox2" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 4
+monitoring = false
 
 [node name="ColHitBox" type="CollisionShape2D" parent="ColHitBox2"]
 shape = SubResource("CircleShape2D_1luax")
@@ -44,6 +45,7 @@ shape = SubResource("CircleShape2D_1luax")
 visible = false
 shape = SubResource("CircleShape2D_b0qpl")
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]
 [connection signal="area_entered" from="ColHookBox2" to="." method="_on_col_hook_box_2_area_entered"]
 [connection signal="area_entered" from="ColHitBox2" to="." method="_on_col_hit_box_2_area_entered"]

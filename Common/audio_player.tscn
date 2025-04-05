@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bes8e7lnvdei5"]
+[gd_scene load_steps=20 format=3 uid="uid://bes8e7lnvdei5"]
 
 [ext_resource type="Script" path="res://River/audio_player.gd" id="1_d5fut"]
 [ext_resource type="AudioStream" uid="uid://dix3dgwhorurr" path="res://Audio/Sound Effects/HookHitWater1.mp3" id="2_3hq6o"]
@@ -17,6 +17,8 @@
 [ext_resource type="AudioStream" uid="uid://by2t4rhopdpfi" path="res://Audio/Sound Effects/Reeling.mp3" id="15_0vnpx"]
 [ext_resource type="AudioStream" uid="uid://bd26hs01xu7y2" path="res://Audio/Music/Yellow River.wav" id="16_lpbbi"]
 [ext_resource type="AudioStream" uid="uid://46wsky54ga51" path="res://Audio/Sound Effects/Wildlife.mp3" id="17_pdjei"]
+[ext_resource type="AudioStream" uid="uid://ka17owo2inkv" path="res://Audio/Music/Yellow River (Piano Ver).wav" id="18_cqphl"]
+[ext_resource type="AudioStream" uid="uid://b8p522n1g1f7n" path="res://Audio/Music/Yellow River (Guitar Ver).wav" id="19_cejx0"]
 
 [node name="AudioPlayer" type="Node2D"]
 script = ExtResource("1_d5fut")
@@ -68,3 +70,9 @@ stream = ExtResource("16_lpbbi")
 
 [node name="Wildlife" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("17_pdjei")
+
+[node name="BGMPiano" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("18_cqphl")
+
+[node name="BGMGuitar" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("19_cejx0")

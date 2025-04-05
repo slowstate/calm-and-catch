@@ -37,7 +37,7 @@ func _process(delta: float) -> void:
 
 func set_fish_type():
 	var random_int = randi_range(1,100)
-	if random_int <= 100: # 5% chance
+	if random_int <= 5: # 5% chance
 		sprite_animation.speed_scale = 1.7
 		fish_type = Global.Fish.Muskellunge
 		speed = 80

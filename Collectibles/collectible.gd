@@ -17,6 +17,7 @@ var collectible_type: Global.Collectible = Global.Collectible.Bonsai
 signal caught(collectible)
 signal hooked(collectible)
 signal obstacle_hit(collectible)
+signal collectibles_depleted()
 
 var is_being_reeled: bool = false
 
@@ -36,9 +37,10 @@ func _process(delta: float) -> void:
 
 func set_collectible_type():
 	var remaining_collectibles: Array = Global.Collectible.values().duplicate()
+	
 	for collectible in Global.CollectiblesCaught:
 		remaining_collectibles.erase(collectible)
-		
+	
 	collectible_type = remaining_collectibles.pick_random()
 	
 	match collectible_type:
@@ -51,6 +53,7 @@ func set_collectible_type():
 		Global.Collectible.Lantern:
 			sprite_2d.texture = LANTERN
 			#sprite_2d.scale = 1.4
+
 
 func _on_despawn_timer_timeout() -> void:
 	queue_free()

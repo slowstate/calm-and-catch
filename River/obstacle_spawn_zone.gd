@@ -17,7 +17,7 @@ func _ready() -> void:
 
 func _on_obstacle_spawn_timer_timeout() -> void:
 	var obstacle_type = randi_range(1,100)
-	if obstacle_type >5:
+	if obstacle_type >10:
 		var new_obstacle = LOG.instantiate()
 		new_obstacle.position = random_spawn_location()
 		get_tree().root.add_child(new_obstacle)

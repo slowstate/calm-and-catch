@@ -108,7 +108,10 @@ func _on_fish_spawn_zone_fish_caught(fish: Variant) -> void:
 	audio_player.play_random_sound(["FishCaught1", "FishCaught2"])
 
 func _on_player_max_tension() -> void:
-	stop_reeling_and_reset_fish()
+	if hooked_fish != null:
+		stop_reeling_and_reset_fish()
+	else:
+		stop_reeling_and_reset_collectible()
 	audio_player.play_random_sound(["FishEscape1", "FishEscape2"])
 
 func _on_fish_spawn_zone_fish_obstacle_hit(_fish: Variant) -> void:
@@ -177,3 +180,22 @@ func _on_lantern_mouse_exited() -> void:
 func _on_lantern_enable_night_mode(is_enabled: bool) -> void:
 	boat_spawn_zone.set_current_boat_night_mode(is_enabled)
 	fish_spawn_zone.set_current_fish_night_mode(is_enabled)
+
+
+func _on_collectibles_bonsaibgm_clicked() -> void:
+	if !audio_player.is_playing("BGMPiano"):
+		audio_player.stop_sound("BGM")
+		audio_player.stop_sound("BGMGuitar")
+		audio_player.play_sound("BGMPiano",10,10,1,1)
+	else:
+		audio_player.stop_sound("BGMPiano")
+		audio_player.play_sound("BGM",10,10,1,1)
+
+func _on_collectibles_guitarbgm_clicked() -> void:
+	if !audio_player.is_playing("BGMGuitar"):
+		audio_player.stop_sound("BGM")
+		audio_player.stop_sound("BGMPiano")
+		audio_player.play_sound("BGMGuitar",5,5,1,1)
+	else:
+		audio_player.stop_sound("BGMGuitar")
+		audio_player.play_sound("BGM",10,10,1,1)

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b8p522n1g1f7n"
+path="res://.godot/imported/Yellow River (Guitar Ver).wav-62930bfa842ac874f89d6de87bbfea25.sample"
+
+[deps]
+
+source_file="res://Audio/Music/Yellow River (Guitar Ver).wav"
+dest_files=["res://.godot/imported/Yellow River (Guitar Ver).wav-62930bfa842ac874f89d6de87bbfea25.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

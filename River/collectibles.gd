@@ -7,14 +7,14 @@ extends Node2D
 signal bonsaibgm_clicked
 signal guitarbgm_clicked
 
-func set_collectible_visibility(collectible_type: Global.Collectible, is_visible: bool):
+func set_collectible_visibility(collectible_type: Global.Collectible, collectible_visibility: bool):
 	match collectible_type:
 		Global.Collectible.Bonsai:
-			bonsai.visible = is_visible
+			bonsai.visible = collectible_visibility
 		Global.Collectible.Guitar:
-			guitar.visible = is_visible
+			guitar.visible = collectible_visibility
 		Global.Collectible.Lantern:
-			lantern.visible = is_visible
+			lantern.visible = collectible_visibility
 
 
 func _on_bonsai_bonsaibgm() -> void:

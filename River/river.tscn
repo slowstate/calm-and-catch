@@ -86,7 +86,7 @@ gradient = SubResource("Gradient_gmcx7")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ft5l0"]
 particle_flag_disable_z = true
 emission_shape = 3
-emission_box_extents = Vector3(600, 80, 1)
+emission_box_extents = Vector3(1100, 80, 1)
 spread = 20.0
 initial_velocity_min = -50.0
 initial_velocity_max = -10.0
@@ -236,7 +236,12 @@ script = ExtResource("6_kwcog")
 
 [node name="TreeStump" type="Sprite2D" parent="."]
 z_as_relative = false
-position = Vector2(843, 611)
+position = Vector2(984, 602)
+texture = ExtResource("19_iom2y")
+
+[node name="TreeStump2" type="Sprite2D" parent="."]
+z_as_relative = false
+position = Vector2(859, 601)
 texture = ExtResource("19_iom2y")
 
 [node name="Bonfire" type="Sprite2D" parent="."]
@@ -324,7 +329,7 @@ script = ExtResource("16_4174k")
 [node name="Bonsai" type="Area2D" parent="Collectibles"]
 visible = false
 z_index = 1
-position = Vector2(1045, 574)
+position = Vector2(1065, 581)
 scale = Vector2(0.4, 0.4)
 script = ExtResource("16_3hsce")
 
@@ -339,7 +344,7 @@ scale = Vector2(1.66667, 1.66667)
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Collectibles/Bonsai/Effects"]
 z_index = 1
 material = SubResource("CanvasItemMaterial_4hk4s")
-position = Vector2(577, 588)
+position = Vector2(316.499, 588)
 amount = 200
 process_material = SubResource("ParticleProcessMaterial_ft5l0")
 texture = ExtResource("17_bagb5")
@@ -352,8 +357,8 @@ shape = SubResource("CircleShape2D_dlpg5")
 
 [node name="Guitar" type="Area2D" parent="Collectibles"]
 visible = false
-position = Vector2(851, 601)
-scale = Vector2(0.6, 0.6)
+position = Vector2(988, 585)
+scale = Vector2(0.8, 0.8)
 script = ExtResource("19_pfa55")
 
 [node name="Guitar" type="Sprite2D" parent="Collectibles/Guitar"]

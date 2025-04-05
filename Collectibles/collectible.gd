@@ -17,8 +17,6 @@ var collectible_type: Global.Collectible = Global.Collectible.Bonsai
 signal caught(collectible)
 signal hooked(collectible)
 signal obstacle_hit(collectible)
-signal collectibles_depleted()
-
 var is_being_reeled: bool = false
 
 # Called when the node enters the scene tree for the first time.
@@ -39,20 +37,21 @@ func set_collectible_type():
 	var remaining_collectibles: Array = Global.Collectible.values().duplicate()
 	
 	for collectible in Global.CollectiblesCaught:
-		remaining_collectibles.erase(collectible)
+		if remaining_collectibles.has(collectible):
+			remaining_collectibles.erase(collectible)
 	
 	collectible_type = remaining_collectibles.pick_random()
 	
 	match collectible_type:
 		Global.Collectible.Bonsai:
 			sprite_2d.texture = BONSAI
-			#sprite_2d.scale = 0.4
+			sprite_2d.scale = Vector2(0.3, 0.3)
 		Global.Collectible.Guitar:
 			sprite_2d.texture = GUITAR
-			#sprite_2d.scale = 0.8
+			sprite_2d.scale = Vector2(0.6, 0.6)
 		Global.Collectible.Lantern:
 			sprite_2d.texture = LANTERN
-			#sprite_2d.scale = 1.4
+			sprite_2d.scale = Vector2(0.6, 0.6)
 
 
 func _on_despawn_timer_timeout() -> void:
@@ -71,5 +70,6 @@ func _on_col_hit_box_2_area_entered(_area: Area2D) -> void:
 
 
 func _on_body_entered(_body: Node2D) -> void:
-	Global.CollectiblesCaught.push_back(collectible_type)
+	if !Global.CollectiblesCaught.has(collectible_type):
+		Global.CollectiblesCaught.push_back(collectible_type)
 	caught.emit(self)

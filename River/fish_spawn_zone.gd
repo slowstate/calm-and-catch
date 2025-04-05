@@ -8,18 +8,19 @@ signal fish_hooked(fish)
 signal fish_caught(fish)
 signal fish_obstacle_hit(fish)
 
+var current_fish
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	fish_spawn_timer.start()
 
-
 func _on_fish_spawn_timer_timeout() -> void:
-	var new_fish = FISH.instantiate()
-	new_fish.hooked.connect(on_fish_hooked)
-	new_fish.caught.connect(on_fish_caught)
-	new_fish.obstacle_hit.connect(on_fish_obstacle_hit)
-	new_fish.position = random_spawn_location()
-	get_tree().root.add_child(new_fish)
+	current_fish = FISH.instantiate()
+	current_fish.hooked.connect(on_fish_hooked)
+	current_fish.caught.connect(on_fish_caught)
+	current_fish.obstacle_hit.connect(on_fish_obstacle_hit)
+	current_fish.position = random_spawn_location()
+	get_tree().root.add_child(current_fish)
 
 
 func random_spawn_location() -> Vector2:
@@ -45,3 +46,7 @@ func on_fish_obstacle_hit(fish):
 func start_fish_spawn_timer():
 	fish_spawn_timer.wait_time = 3
 	fish_spawn_timer.start()
+
+func set_current_fish_night_mode(is_enabled: bool):
+	if current_fish != null:
+		current_fish.set_night_mode(is_enabled)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://dvkv21wkwo18p"]
+[gd_scene load_steps=66 format=3 uid="uid://dvkv21wkwo18p"]
 
 [ext_resource type="Script" path="res://River/river.gd" id="1_f45dc"]
 [ext_resource type="PackedScene" uid="uid://bhl8fy0l6levh" path="res://Player/player.tscn" id="1_jc3st"]
@@ -10,15 +10,19 @@
 [ext_resource type="Script" path="res://River/obstacle_spawn_zone.gd" id="5_efqls"]
 [ext_resource type="Texture2D" uid="uid://4x4j1fhhhikm" path="res://River/Lily.png" id="5_j0r74"]
 [ext_resource type="Script" path="res://River/lily.gd" id="6_kwcog"]
-[ext_resource type="Texture2D" uid="uid://ctafpdkjpi2hn" path="res://Collectibles/Guitar.png" id="7_evxq4"]
 [ext_resource type="Texture2D" uid="uid://c5m6803fjceqn" path="res://Collectibles/Bonsai.png" id="7_k41ox"]
-[ext_resource type="Texture2D" uid="uid://wc2qpigbakxt" path="res://Collectibles/Tree Stump.png" id="8_7oui7"]
 [ext_resource type="PackedScene" uid="uid://bes8e7lnvdei5" path="res://Common/audio_player.tscn" id="9_dfmyq"]
 [ext_resource type="Script" path="res://River/boat_spawn_zone.gd" id="11_fy606"]
 [ext_resource type="PackedScene" uid="uid://bbst3n3gkcp3c" path="res://Rack/rack.tscn" id="12_mp8o1"]
 [ext_resource type="Texture2D" uid="uid://dmamd1fjk0uj3" path="res://Collectibles/Lantern.png" id="14_rwgtq"]
 [ext_resource type="Texture2D" uid="uid://b6kgsp4fad0pc" path="res://Collectibles/Bonfire.png" id="14_ye4oq"]
+[ext_resource type="Script" path="res://River/bonsai.gd" id="16_3hsce"]
+[ext_resource type="Script" path="res://River/collectibles.gd" id="16_4174k"]
 [ext_resource type="Texture2D" uid="uid://kgc3ureltdsn" path="res://Collectibles/Petals.png" id="17_bagb5"]
+[ext_resource type="Texture2D" uid="uid://ctafpdkjpi2hn" path="res://Collectibles/Guitar.png" id="18_1c5xs"]
+[ext_resource type="Texture2D" uid="uid://wc2qpigbakxt" path="res://Collectibles/Tree Stump.png" id="19_iom2y"]
+[ext_resource type="Script" path="res://River/guitar.gd" id="19_pfa55"]
+[ext_resource type="Script" path="res://River/lantern.gd" id="21_jki3e"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_mk6ue"]
 noise_type = 2
@@ -66,6 +70,39 @@ normal = Vector2(1, 0)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_2ullu"]
 normal = Vector2(-1, 0)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4hk4s"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_gmcx7"]
+offsets = PackedFloat32Array(0.00662252, 0.122517, 0.764901, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vb5dy"]
+gradient = SubResource("Gradient_gmcx7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ft5l0"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(600, 80, 1)
+spread = 20.0
+initial_velocity_min = -50.0
+initial_velocity_max = -10.0
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = 50.0
+gravity = Vector3(0, 10, 0)
+scale_min = 0.2
+color_ramp = SubResource("GradientTexture1D_vb5dy")
+anim_offset_max = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dlpg5"]
+radius = 70.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fk16v"]
+radius = 37.0
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_etn7h"]
 light_mode = 1
 
@@ -105,29 +142,29 @@ fill = 1
 fill_from = Vector2(0.517094, 0.461538)
 fill_to = Vector2(0.863248, 0.149573)
 
-[sub_resource type="Gradient" id="Gradient_nnnes"]
+[sub_resource type="Gradient" id="Gradient_ihod3"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0.086)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_0f5es"]
-gradient = SubResource("Gradient_nnnes")
+gradient = SubResource("Gradient_ihod3")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.337607, 0.0811966)
 
-[sub_resource type="Gradient" id="Gradient_a07t7"]
+[sub_resource type="Gradient" id="Gradient_77ncy"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_lh8wf"]
-gradient = SubResource("Gradient_a07t7")
+gradient = SubResource("Gradient_77ncy")
 fill = 1
 fill_from = Vector2(0.504274, 0.495726)
 fill_to = Vector2(0.846154, 0.209402)
 
-[sub_resource type="Gradient" id="Gradient_6f6td"]
+[sub_resource type="Gradient" id="Gradient_p7tfr"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_q223t"]
-gradient = SubResource("Gradient_6f6td")
+gradient = SubResource("Gradient_p7tfr")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.205128, 0.811966)
@@ -172,32 +209,8 @@ background_mode = 3
 glow_enabled = true
 glow_bloom = 0.2
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4hk4s"]
-particles_animation = true
-particles_anim_h_frames = 4
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="Gradient" id="Gradient_gmcx7"]
-offsets = PackedFloat32Array(0.00662252, 0.122517, 0.764901, 1)
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_vb5dy"]
-gradient = SubResource("Gradient_gmcx7")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ft5l0"]
-particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(600, 80, 1)
-spread = 20.0
-initial_velocity_min = -50.0
-initial_velocity_max = -10.0
-angular_velocity_min = -1.60933e-05
-angular_velocity_max = 50.0
-gravity = Vector3(0, 10, 0)
-scale_min = 0.2
-color_ramp = SubResource("GradientTexture1D_vb5dy")
-anim_offset_max = 1.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_fhwtq"]
+radius = 26.6667
 
 [node name="River" type="Node2D"]
 script = ExtResource("1_f45dc")
@@ -221,24 +234,15 @@ scale = Vector2(0.6, 0.6)
 texture = ExtResource("5_j0r74")
 script = ExtResource("6_kwcog")
 
-[node name="Tree Stump" type="Sprite2D" parent="."]
-position = Vector2(864, 601)
-texture = ExtResource("8_7oui7")
+[node name="TreeStump" type="Sprite2D" parent="."]
+z_as_relative = false
+position = Vector2(843, 611)
+texture = ExtResource("19_iom2y")
 
-[node name="Tree Stump2" type="Sprite2D" parent="."]
-position = Vector2(978, 600)
-texture = ExtResource("8_7oui7")
-
-[node name="Guitar" type="Sprite2D" parent="Tree Stump2"]
-z_index = 1
-position = Vector2(4, -25)
-texture = ExtResource("7_evxq4")
-
-[node name="Bonsai" type="Sprite2D" parent="."]
-z_index = 1
-position = Vector2(1050, 574)
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("7_k41ox")
+[node name="Bonfire" type="Sprite2D" parent="."]
+position = Vector2(922, 603)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("14_ye4oq")
 
 [node name="Player" parent="." instance=ExtResource("1_jc3st")]
 position = Vector2(532, 472)
@@ -314,15 +318,72 @@ shape = SubResource("WorldBoundaryShape2D_2ullu")
 
 [node name="AudioPlayer" parent="." instance=ExtResource("9_dfmyq")]
 
-[node name="Lighting" type="Node2D" parent="."]
+[node name="Collectibles" type="Node2D" parent="."]
+script = ExtResource("16_4174k")
 
-[node name="Bonfire" type="Sprite2D" parent="Lighting"]
+[node name="Bonsai" type="Area2D" parent="Collectibles"]
+visible = false
+z_index = 1
+position = Vector2(1045, 574)
+scale = Vector2(0.4, 0.4)
+script = ExtResource("16_3hsce")
+
+[node name="Sprite2D" type="Sprite2D" parent="Collectibles/Bonsai"]
+texture = ExtResource("7_k41ox")
+
+[node name="Effects" type="Node2D" parent="Collectibles/Bonsai"]
+visible = false
+position = Vector2(-1750, -956.667)
+scale = Vector2(1.66667, 1.66667)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Collectibles/Bonsai/Effects"]
+z_index = 1
+material = SubResource("CanvasItemMaterial_4hk4s")
+position = Vector2(577, 588)
+amount = 200
+process_material = SubResource("ParticleProcessMaterial_ft5l0")
+texture = ExtResource("17_bagb5")
+lifetime = 3.0
+visibility_rect = Rect2(-575, -60, 1150, 120)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collectibles/Bonsai"]
+position = Vector2(0, 8.33333)
+shape = SubResource("CircleShape2D_dlpg5")
+
+[node name="Guitar" type="Area2D" parent="Collectibles"]
+visible = false
+position = Vector2(851, 601)
+scale = Vector2(0.6, 0.6)
+script = ExtResource("19_pfa55")
+
+[node name="Guitar" type="Sprite2D" parent="Collectibles/Guitar"]
+z_index = 1
+texture = ExtResource("18_1c5xs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collectibles/Guitar"]
+shape = SubResource("CircleShape2D_fk16v")
+
+[node name="Lantern" type="Area2D" parent="Collectibles"]
+visible = false
+position = Vector2(179, 589)
+scale = Vector2(0.6, 0.6)
+script = ExtResource("21_jki3e")
+
+[node name="Lantern" type="Sprite2D" parent="Collectibles/Lantern"]
+texture = ExtResource("14_rwgtq")
+
+[node name="NightMode" type="Node2D" parent="Collectibles/Lantern/Lantern"]
+visible = false
+position = Vector2(-298.333, -981.667)
+scale = Vector2(1.66667, 1.66667)
+
+[node name="Bonfire" type="Sprite2D" parent="Collectibles/Lantern/Lantern/NightMode"]
 material = SubResource("CanvasItemMaterial_etn7h")
 position = Vector2(922, 603)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("14_ye4oq")
 
-[node name="CPUParticles2D2" type="CPUParticles2D" parent="Lighting/Bonfire"]
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="Collectibles/Lantern/Lantern/NightMode/Bonfire"]
 material = SubResource("CanvasItemMaterial_cfdvi")
 position = Vector2(-1.33337, -12)
 amount = 1000
@@ -338,7 +399,7 @@ scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_g12ky")
 color_ramp = SubResource("Gradient_q3w4b")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="Lighting/Bonfire"]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Collectibles/Lantern/Lantern/NightMode/Bonfire"]
 material = SubResource("CanvasItemMaterial_cfdvi")
 position = Vector2(-1.33333, -12)
 amount = 1000
@@ -354,26 +415,26 @@ scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_g12ky")
 color_ramp = SubResource("Gradient_vq8io")
 
-[node name="PointLight2D" type="PointLight2D" parent="Lighting/Bonfire"]
+[node name="PointLight2D" type="PointLight2D" parent="Collectibles/Lantern/Lantern/NightMode/Bonfire"]
 position = Vector2(-2.66668, 4)
 scale = Vector2(3, 1.5)
 color = Color(0.959714, 0.43506, 0.174706, 1)
 energy = 1.5
 texture = SubResource("GradientTexture2D_ji703")
 
-[node name="Lantern" type="Sprite2D" parent="Lighting"]
+[node name="Lantern" type="Sprite2D" parent="Collectibles/Lantern/Lantern/NightMode"]
 position = Vector2(179, 589)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("14_rwgtq")
 
-[node name="PointLight2D" type="PointLight2D" parent="Lighting/Lantern"]
+[node name="PointLight2D" type="PointLight2D" parent="Collectibles/Lantern/Lantern/NightMode/Lantern"]
 position = Vector2(-3.33337, 1.66669)
 scale = Vector2(4.45833, 1.77083)
 energy = 0.5
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_0f5es")
 
-[node name="Lantern" type="PointLight2D" parent="Lighting/Lantern"]
+[node name="Lantern" type="PointLight2D" parent="Collectibles/Lantern/Lantern/NightMode/Lantern"]
 position = Vector2(-1.6667, 6.66668)
 scale = Vector2(6.58333, 2.96875)
 color = Color(0.945675, 0.66575, 0.666723, 1)
@@ -381,25 +442,25 @@ energy = 0.6
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_lh8wf")
 
-[node name="PointLight2D2" type="PointLight2D" parent="Lighting/Lantern"]
+[node name="PointLight2D2" type="PointLight2D" parent="Collectibles/Lantern/Lantern/NightMode/Lantern"]
 position = Vector2(-2.54313e-05, 1.66667)
 scale = Vector2(0.364584, 0.364583)
 energy = 0.2
 texture = SubResource("GradientTexture2D_q223t")
 
-[node name="Moonlight2" type="PointLight2D" parent="Lighting"]
+[node name="Moonlight2" type="PointLight2D" parent="Collectibles/Lantern/Lantern/NightMode"]
 position = Vector2(546, 198)
 scale = Vector2(21.4375, 19.6094)
 energy = 0.35
 texture = SubResource("GradientTexture2D_m44vn")
 
-[node name="Moonlight" type="PointLight2D" parent="Lighting"]
+[node name="Moonlight" type="PointLight2D" parent="Collectibles/Lantern/Lantern/NightMode"]
 position = Vector2(591, 50)
 scale = Vector2(2.95312, 3.51563)
 energy = 0.5
 texture = SubResource("GradientTexture2D_2gv57")
 
-[node name="Fireflies1" type="CPUParticles2D" parent="Lighting"]
+[node name="Fireflies1" type="CPUParticles2D" parent="Collectibles/Lantern/Lantern/NightMode"]
 modulate = Color(50, 20, 5, 1)
 material = SubResource("CanvasItemMaterial_1dcev")
 position = Vector2(1087, 584)
@@ -422,7 +483,7 @@ orbit_velocity_min = -0.2
 orbit_velocity_max = 0.2
 scale_amount_curve = SubResource("Curve_mcsso")
 
-[node name="Fireflies2" type="CPUParticles2D" parent="Lighting"]
+[node name="Fireflies2" type="CPUParticles2D" parent="Collectibles/Lantern/Lantern/NightMode"]
 modulate = Color(50, 20, 5, 1)
 material = SubResource("CanvasItemMaterial_1dcev")
 position = Vector2(305, 607)
@@ -445,23 +506,14 @@ orbit_velocity_min = -0.2
 orbit_velocity_max = 0.2
 scale_amount_curve = SubResource("Curve_mcsso")
 
-[node name="CanvasModulate" type="CanvasModulate" parent="Lighting"]
+[node name="CanvasModulate" type="CanvasModulate" parent="Collectibles/Lantern/Lantern/NightMode"]
 color = Color(0.0639465, 0.304457, 0.469044, 1)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Lighting"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Collectibles/Lantern/Lantern/NightMode"]
 environment = SubResource("Environment_xifc1")
 
-[node name="Effects" type="Node2D" parent="."]
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Effects"]
-z_index = 1
-material = SubResource("CanvasItemMaterial_4hk4s")
-position = Vector2(577, 588)
-amount = 200
-process_material = SubResource("ParticleProcessMaterial_ft5l0")
-texture = ExtResource("17_bagb5")
-lifetime = 3.0
-visibility_rect = Rect2(-575, -60, 1150, 120)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collectibles/Lantern"]
+shape = SubResource("CircleShape2D_fhwtq")
 
 [connection signal="max_tension" from="Player" to="." method="_on_player_max_tension"]
 [connection signal="reeling" from="Player" to="." method="_on_player_reeling"]
@@ -477,3 +529,19 @@ visibility_rect = Rect2(-575, -60, 1150, 120)
 [connection signal="collectible_obstacle_hit" from="ObstacleSpawnZone" to="." method="_on_obstacle_spawn_zone_collectible_obstacle_hit"]
 [connection signal="timeout" from="ObstacleSpawnZone/ObstacleSpawnTimer" to="ObstacleSpawnZone" method="_on_obstacle_spawn_timer_timeout"]
 [connection signal="timeout" from="BoatSpawnZone/BoatSpawnTimer" to="BoatSpawnZone" method="_on_obstacle_spawn_timer_timeout"]
+[connection signal="input_event" from="Collectibles/Bonsai" to="Collectibles/Bonsai" method="_on_input_event"]
+[connection signal="mouse_entered" from="Collectibles/Bonsai" to="." method="_on_bonsai_mouse_entered"]
+[connection signal="mouse_entered" from="Collectibles/Bonsai" to="Collectibles/Bonsai" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Collectibles/Bonsai" to="." method="_on_bonsai_mouse_exited"]
+[connection signal="mouse_exited" from="Collectibles/Bonsai" to="Collectibles/Bonsai" method="_on_mouse_exited"]
+[connection signal="input_event" from="Collectibles/Guitar" to="Collectibles/Guitar" method="_on_input_event"]
+[connection signal="mouse_entered" from="Collectibles/Guitar" to="." method="_on_guitar_mouse_entered"]
+[connection signal="mouse_entered" from="Collectibles/Guitar" to="Collectibles/Guitar" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Collectibles/Guitar" to="." method="_on_guitar_mouse_exited"]
+[connection signal="mouse_exited" from="Collectibles/Guitar" to="Collectibles/Guitar" method="_on_mouse_exited"]
+[connection signal="enable_night_mode" from="Collectibles/Lantern" to="." method="_on_lantern_enable_night_mode"]
+[connection signal="input_event" from="Collectibles/Lantern" to="Collectibles/Lantern" method="_on_input_event"]
+[connection signal="mouse_entered" from="Collectibles/Lantern" to="." method="_on_lantern_mouse_entered"]
+[connection signal="mouse_entered" from="Collectibles/Lantern" to="Collectibles/Lantern" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Collectibles/Lantern" to="." method="_on_lantern_mouse_exited"]
+[connection signal="mouse_exited" from="Collectibles/Lantern" to="Collectibles/Lantern" method="_on_mouse_exited"]

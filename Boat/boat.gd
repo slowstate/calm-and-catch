@@ -4,6 +4,9 @@ extends Area2D
 @onready var move_timer: Timer = $MoveTimer
 @onready var despawn_timer: Timer = $DespawnTimer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var point_light_2d: PointLight2D = $Lantern/PointLight2D
+@onready var lantern: PointLight2D = $Lantern/Lantern
+@onready var point_light_2d_2: PointLight2D = $Lantern/PointLight2D2
 
 var speed
 var original_position: Vector2
@@ -35,3 +38,8 @@ func _on_stop_timer_timeout() -> void:
 
 func _on_despawn_timer_timeout() -> void:
 	queue_free()
+
+func set_night_mode(is_enabled: bool):
+	point_light_2d.visible = is_enabled
+	lantern.visible = is_enabled
+	point_light_2d_2.visible = is_enabled

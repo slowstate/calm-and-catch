@@ -89,6 +89,7 @@ scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_tveq3")
 
 [node name="PointLight2D" type="PointLight2D" parent="Lantern"]
+visible = false
 position = Vector2(-3.33337, 1.66669)
 scale = Vector2(4.45833, 1.77083)
 energy = 0.5
@@ -96,6 +97,7 @@ shadow_enabled = true
 texture = SubResource("GradientTexture2D_dadvl")
 
 [node name="Lantern" type="PointLight2D" parent="Lantern"]
+visible = false
 position = Vector2(-1.6667, 6.66668)
 scale = Vector2(6.58333, 2.96875)
 color = Color(0.945675, 0.66575, 0.666723, 1)
@@ -104,6 +106,7 @@ shadow_enabled = true
 texture = SubResource("GradientTexture2D_awpa1")
 
 [node name="PointLight2D2" type="PointLight2D" parent="Lantern"]
+visible = false
 position = Vector2(-2.54313e-05, 1.66667)
 scale = Vector2(0.364584, 0.364583)
 energy = 0.2

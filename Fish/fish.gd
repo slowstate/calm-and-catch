@@ -37,7 +37,7 @@ func _process(delta: float) -> void:
 
 func set_fish_type():
 	var random_int = randi_range(1,100)
-	if random_int <= 5: # 5% chance
+	if random_int <= 100: # 5% chance
 		sprite_animation.speed_scale = 1.7
 		fish_type = Global.Fish.Muskellunge
 		speed = 80
@@ -90,3 +90,9 @@ func _on_hook_box_hook_box_exited() -> void:
 
 func _on_hit_box_hit_box_entered() -> void:
 	obstacle_hit.emit(self)
+
+func set_night_mode(is_enabled: bool):
+	if is_enabled:
+		sprite_animation.modulate = Color(8, 8, 8, 1)
+	else:
+		sprite_animation.modulate = Color(1, 1, 1, 1)

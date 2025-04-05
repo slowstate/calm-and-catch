@@ -17,6 +17,7 @@ const MAX_HOOK_THROW_DISTANCE = 500
 const MAX_TENSION = 300
 const MIN_TENSION = 0
 
+var rod_controllable: bool = true
 var tension = 0
 var tension_increase = 100
 var raise_tension = false

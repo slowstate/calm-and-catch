@@ -48,6 +48,10 @@ script = ExtResource("6_q6q68")
 position = Vector2(7, -7)
 scale = Vector2(0.4, 0.4)
 
+[node name="Button" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+
 [connection signal="charge_hook" from="PlayerStateMachine/Idle" to="." method="_on_idle_charge_hook"]
 [connection signal="throw_hook" from="PlayerStateMachine/Idle" to="." method="_on_idle_throw_hook"]
 [connection signal="retract_hook" from="PlayerStateMachine/Waiting" to="." method="_on_waiting_retract_hook"]

@@ -17,12 +17,10 @@ func _ready() -> void:
 
 func _on_obstacle_spawn_timer_timeout() -> void:
 	var obstacle_type = randi_range(1,100)
-	if obstacle_type >100:
+	if obstacle_type >5:
 		var new_obstacle = LOG.instantiate()
 		new_obstacle.position = random_spawn_location()
 		get_tree().root.add_child(new_obstacle)
-		obstacle_spawn_timer.wait_time = randi_range(5, 10)
-		obstacle_spawn_timer.start()
 	else:
 		var new_collectible = COLLECTIBLE.instantiate()
 		new_collectible.hooked.connect(on_collectible_hooked)
@@ -30,8 +28,8 @@ func _on_obstacle_spawn_timer_timeout() -> void:
 		new_collectible.obstacle_hit.connect(on_collectible_obstacle_hit)
 		new_collectible.position = random_spawn_location()
 		get_tree().root.add_child(new_collectible)
-		obstacle_spawn_timer.wait_time = randi_range(5, 10)
-		obstacle_spawn_timer.start()
+	obstacle_spawn_timer.wait_time = randi_range(5, 10)
+	obstacle_spawn_timer.start()
 		
 
 func random_spawn_location() -> Vector2:

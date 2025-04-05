@@ -13,7 +13,7 @@ func update(_delta: float) -> void:
 	pass
 	
 func physics_update(_delta: float) -> void:
-	if Input.is_action_just_pressed("player_primary_action"):
+	if Input.is_action_just_pressed("player_primary_action") && Global.player.rod_controllable:
 		reeling.emit()
-	if Input.is_action_just_released("player_primary_action"):
+	if Input.is_action_just_released("player_primary_action") && Global.player.rod_controllable:
 		relaxing.emit()
